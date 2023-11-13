@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2021 LiteKite Startup. All rights reserved.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<Keyboard xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:keyHeight="@dimen/keyboard_key_size"
+    app:keyVerticalGap="@dimen/keyboard_key_vertical_gap"
+    app:keyWidth="@dimen/keyboard_key_size"
+    tools:ignore="UnusedResources">
+
+    <Row>
+        <Key
+            app:keyEdgeFlags="left"
+            app:keyLabel="1" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="2" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="3" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="4" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="5" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="6" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="7"
+            app:popupCharacters="@string/alternates_for_u" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="8" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="9" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="0" />
+    </Row>
+
+    <Row>
+        <Key
+            app:keyEdgeFlags="left"
+            app:keyLabel="\@"/>
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="#" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="$" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="_" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="&amp;" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="-" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="+" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="(" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel=")"/>
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="/"/>
+    </Row>
+
+    <Row>
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_half_key_size"
+            app:keyLabel="=" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="*" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="&quot;" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="'" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel=":" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel=";" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="!" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="\?" />
+        <Key
+            app:codes="@integer/keycode_delete"
+            app:isRepeatable="true"
+            app:keyEdgeFlags="right"
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyWidth="@dimen/keyboard_double_key_size"
+            app:keyIcon="@drawable/ic_keyboard_key_backspace" />
+    </Row>
+
+    <Row>
+        <Key
+            app:codes="@integer/keycode_mode_change"
+            app:keyEdgeFlags="left"
+            app:keyWidth="@dimen/keyboard_double_key_size"
+            app:keyIcon="@drawable/ic_keyboard_key_qwerty" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="&lt;" />
+        <Key
+            app:codes="@integer/keycode_close_keyboard"
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyIcon="@drawable/ic_keyboard_key_language" />
+        <Key
+            app:codes="@integer/keycode_space"
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="Symbol"
+            app:keyWidth="@dimen/keyboard_key_space_bar_width" />
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="&gt;" />
+        <Key
+            app:codes="@integer/keycode_enter"
+            app:keyEdgeFlags="right"
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyWidth="@dimen/keyboard_double_key_size"
+            app:keyIcon="@drawable/ic_keyboard_key_enter" />
+    </Row>
+
+</Keyboard>
