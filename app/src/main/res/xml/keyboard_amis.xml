@@ -100,6 +100,7 @@
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="n" />
         <Key
+            app:codes = "@integer/ng"
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="ng" />
         <Key

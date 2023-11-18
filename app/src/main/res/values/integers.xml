@@ -23,4 +23,19 @@
     <integer name="keycode_enter">10</integer>
     <integer name="keycode_close_keyboard">-99</integer>
 
+    <integer name="ae">-11</integer>
+    <integer name="dh">-12</integer>
+    <integer name="dj">-13</integer>
+    <integer name="dr">-14</integer>
+    <integer name="hl">-15</integer>
+    <integer name="lh">-16</integer>
+    <integer name="lj">-17</integer>
+    <integer name="lr">-18</integer>
+    <integer name="ng">-19</integer>
+    <integer name="oe">-20</integer>
+    <integer name="sh">-21</integer>
+    <integer name="th">-22</integer>
+    <integer name="tj">-23</integer>
+    <integer name="tr">-24</integer>
+
 </resources>

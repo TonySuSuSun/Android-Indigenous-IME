@@ -35,6 +35,7 @@
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="r" />
         <Key
+            app:codes="@integer/tj"
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="tj" />
         <Key
@@ -65,9 +66,11 @@
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="d" />
         <Key
+            app:codes="@integer/dr"
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="dr" />
         <Key
+            app:codes="@integer/dj"
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="dj" />
         <Key
@@ -110,12 +113,14 @@
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="n" />
         <Key
+            app:codes="@integer/ng"
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="ng" />
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="m" />
         <Key
+            app:codes="@integer/lj"
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="lj" />
         <Key

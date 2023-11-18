@@ -32,6 +32,20 @@ import com.litekite.ime.widget.Keyboard
 import com.litekite.ime.widget.Keyboard.Companion.Amis
 import com.litekite.ime.widget.Keyboard.Companion.English
 import com.litekite.ime.widget.Keyboard.Companion.Paiwan
+import com.litekite.ime.widget.Keyboard.Companion.ae
+import com.litekite.ime.widget.Keyboard.Companion.dh
+import com.litekite.ime.widget.Keyboard.Companion.dj
+import com.litekite.ime.widget.Keyboard.Companion.dr
+import com.litekite.ime.widget.Keyboard.Companion.hl
+import com.litekite.ime.widget.Keyboard.Companion.lh
+import com.litekite.ime.widget.Keyboard.Companion.lj
+import com.litekite.ime.widget.Keyboard.Companion.lr
+import com.litekite.ime.widget.Keyboard.Companion.ng
+import com.litekite.ime.widget.Keyboard.Companion.oe
+import com.litekite.ime.widget.Keyboard.Companion.sh
+import com.litekite.ime.widget.Keyboard.Companion.th
+import com.litekite.ime.widget.Keyboard.Companion.tj
+import com.litekite.ime.widget.Keyboard.Companion.tr
 import com.litekite.ime.widget.KeyboardView
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
@@ -167,13 +181,17 @@ class ImeService : InputMethodService(), ConfigController.Callback {
                     binding.vKeyboard.setShifted(!binding.vKeyboard.isShifted())
                 }
                 Keyboard.KEYCODE_MODE_CHANGE -> {
-                    if (binding.vKeyboard.keyboard === symbolKeyboard) {
-                        if(language === English){
-                            binding.vKeyboard.setKeyboard(qwertyKeyboard)
-                        } else if (language === Amis){
-                            binding.vKeyboard.setKeyboard(amisKeyboard)
-                        } else {
-                            binding.vKeyboard.setKeyboard(paiwanKeyboard)
+                    if (binding.vKeyboard.keyboard == symbolKeyboard) {
+                        when (language) {
+                            English -> {
+                                binding.vKeyboard.setKeyboard(qwertyKeyboard)
+                            }
+                            Amis -> {
+                                binding.vKeyboard.setKeyboard(amisKeyboard)
+                            }
+                            else -> {
+                                binding.vKeyboard.setKeyboard(paiwanKeyboard)
+                            }
                         }
                     } else {
                         binding.vKeyboard.setKeyboard(symbolKeyboard)
@@ -196,15 +214,19 @@ class ImeService : InputMethodService(), ConfigController.Callback {
                     // No alphanumeric keyboard layout support.
                 }
                 Keyboard.KEYCODE_LANGUAGE_KEYBOARD -> {
-                    if (binding.vKeyboard.keyboard === qwertyKeyboard) {
-                        binding.vKeyboard.setKeyboard(amisKeyboard)
-                        language = Amis
-                    } else if (binding.vKeyboard.keyboard === amisKeyboard) {
-                        binding.vKeyboard.setKeyboard(paiwanKeyboard)
-                        language = Paiwan
-                    } else {
-                        binding.vKeyboard.setKeyboard(qwertyKeyboard)
-                        language = English
+                    language =  when (binding.vKeyboard.keyboard) {
+                        qwertyKeyboard -> {
+                            binding.vKeyboard.setKeyboard(amisKeyboard)
+                            Amis
+                        }
+                        amisKeyboard -> {
+                            binding.vKeyboard.setKeyboard(paiwanKeyboard)
+                            Paiwan
+                        }
+                        else -> {
+                            binding.vKeyboard.setKeyboard(qwertyKeyboard)
+                            English
+                        }
                     }
                 }
                 Keyboard.KEYCODE_CYCLE_CHAR -> {
@@ -274,13 +296,59 @@ class ImeService : InputMethodService(), ConfigController.Callback {
     }
 
     private fun commitText(code: Int) {
-        var commitText = Char(code).toString()
+        var commitText = when(code) {
+            ae -> {
+                "ae"
+            }
+            dh -> {
+                "dh"
+            }
+            dj -> {
+                "dj"
+            }
+            dr -> {
+                "dr"
+            }
+            hl -> {
+                "hl"
+            }
+            lh -> {
+                "lh"
+            }
+            lj -> {
+                "lj"
+            }
+            lr -> {
+                "lr"
+            }
+            ng -> {
+                "ng"
+            }
+            oe -> {
+                "oe"
+            }
+            sh -> {
+                "sh"
+            }
+            th -> {
+                "th"
+            }
+            tj -> {
+                "tj"
+            }
+            tr -> {
+                "tr"
+            }
+            else -> {
+                Char(code).toString()
+            }
+        }
         // Chars always come through as lowercase, so we have to explicitly
         // uppercase them if the keyboard is shifted.
         if (binding.vKeyboard.isShifted()) {
-            commitText = commitText.uppercase(binding.vKeyboard.getLocale())
+            commitText = commitText.replaceFirstChar(Char::uppercase)
         }
         ImeApp.printLog(TAG, "commitText: $commitText")
-        currentInputConnection.commitText(commitText, 1)
+        currentInputConnection.commitText(commitText,1)
     }
 }

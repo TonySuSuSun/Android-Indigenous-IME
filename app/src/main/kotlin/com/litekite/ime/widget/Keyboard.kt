@@ -99,6 +99,21 @@ class Keyboard(context: Context, layoutRes: Int) {
         const val KEYCODE_ALPHA_KEYBOARD = -10
         const val KEYCODE_LANGUAGE_KEYBOARD = -99
 
+        const val ae = -11
+        const val dh = -12
+        const val dj = -13
+        const val dr = -14
+        const val hl = -15
+        const val lh = -16
+        const val lj = -17
+        const val lr = -18
+        const val ng = -19
+        const val oe = -20
+        const val sh = -21
+        const val th = -22
+        const val tj = -23
+        const val tr = -24
+
         const val NOT_A_KEY = -1
 
         /** Keyboard key drawable states */
@@ -601,7 +616,7 @@ class Keyboard(context: Context, layoutRes: Int) {
                 label.length < 3 &&
                 Character.isLowerCase(label[0])
             ) {
-                label = label.toString().uppercase(locale)
+                label = label.toString().replaceFirstChar(Char::uppercase)
             }
             return label.toString()
         }
@@ -609,7 +624,7 @@ class Keyboard(context: Context, layoutRes: Int) {
         fun adjustPopupCharCase(popupChar: Char, locale: Locale): String {
             var popupCharStr = popupChar.toString()
             if (isShifted && label.isNotEmpty() && Character.isLowerCase(popupChar)) {
-                popupCharStr = popupCharStr.uppercase(locale)
+                popupCharStr = popupCharStr.replaceFirstChar(Char::uppercase)
             }
             return popupCharStr
         }
