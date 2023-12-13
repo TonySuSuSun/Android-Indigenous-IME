@@ -83,7 +83,7 @@ class KeyPopupCharsWindow @JvmOverloads constructor(
         for (charIndex in popupChars.indices) {
             val keyBinding = WidgetKeyPopupCharBinding.inflate(LayoutInflater.from(context))
             // Adjusting case based on the main keyboard key
-            val keyLabel = key.adjustPopupCharCase(popupChars[charIndex], getLocale())
+            val keyLabel = key.adjustPopupCharCase(popupChars[charIndex])
             keyBinding.tvKeyPopupChar.text = keyLabel
             keyBinding.tvKeyPopupChar.textSize = context.resources.getDimensionPixelSize(
                 R.dimen.keyboard_view_key_text_size

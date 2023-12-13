@@ -26,7 +26,6 @@ import com.litekite.ime.util.DimensUtil.getDimensionOrFraction
 import com.litekite.ime.util.StringUtil.parseCSV
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
-import java.util.Locale
 
 /**
  * Loads an XML description of a keyboard and stores the attributes of the keys.
@@ -192,11 +191,6 @@ class Keyboard(context: Context, layoutRes: Int) {
     /** List of modifier keys such as Shift & Alt, if any */
     private val modifierKeys: ArrayList<Key> = ArrayList()
 
-    /**
-     * Keyboard mode, or zero, if none.
-     */
-    private val keyboardMode: Int = 0
-
     init {
         // Parses Keyboard attributes
         loadKeyboard(context, context.resources.getXml(layoutRes))
@@ -221,8 +215,7 @@ class Keyboard(context: Context, layoutRes: Int) {
                         inRow = true
                         currentRow = Row(context.resources, parser)
                         rows.add(currentRow)
-                        val skipRow = currentRow.keyboardMode != 0 &&
-                            currentRow.keyboardMode != keyboardMode
+                        val skipRow = currentRow.keyboardMode != 0
                         if (skipRow) {
                             skipToEndOfRow(parser)
                             inRow = false
@@ -609,7 +602,7 @@ class Keyboard(context: Context, layoutRes: Int) {
                 )
         }
 
-        fun adjustLabelCase(locale: Locale): String {
+        fun adjustLabelCase(): String {
             var label = this.label
             if (isShifted &&
                 label.isNotEmpty() &&
@@ -621,7 +614,7 @@ class Keyboard(context: Context, layoutRes: Int) {
             return label.toString()
         }
 
-        fun adjustPopupCharCase(popupChar: Char, locale: Locale): String {
+        fun adjustPopupCharCase(popupChar: Char): String {
             var popupCharStr = popupChar.toString()
             if (isShifted && label.isNotEmpty() && Character.isLowerCase(popupChar)) {
                 popupCharStr = popupCharStr.replaceFirstChar(Char::uppercase)

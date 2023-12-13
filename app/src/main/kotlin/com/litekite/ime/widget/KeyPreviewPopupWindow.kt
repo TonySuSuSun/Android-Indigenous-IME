@@ -63,7 +63,7 @@ class KeyPreviewPopupWindow @JvmOverloads constructor(
     private fun getLocale(): Locale = context.resources.configuration.locales[0]
 
     fun showPreview(parent: View, key: Keyboard.Key) {
-        val keyLabel = key.adjustLabelCase(getLocale())
+        val keyLabel = key.adjustLabelCase()
         if (keyLabel.isEmpty() || keyLabel.length > 3) {
             // Key icon or special key code preview is disabled
             return

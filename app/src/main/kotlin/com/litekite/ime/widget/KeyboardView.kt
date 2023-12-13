@@ -15,6 +15,7 @@
  */
 package com.litekite.ime.widget
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -52,6 +53,7 @@ import kotlin.math.max
  * @version 1.0, 30/06/2021
  * @since 1.0
  */
+@SuppressLint("DiscouragedApi")
 class KeyboardView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -288,8 +290,7 @@ class KeyboardView @JvmOverloads constructor(
 
     private fun onBufferDraw(invalidatedKey: Keyboard.Key?) {
         if (buffer == null || keyboardChanged) {
-            if (buffer == null || keyboardChanged &&
-                (buffer?.width != width || buffer?.height != height)
+            if (buffer == null || (buffer?.width != width || buffer?.height != height)
             ) {
                 // Make sure our bitmap is at least 1x1
                 val width = max(1, width)
@@ -351,7 +352,7 @@ class KeyboardView @JvmOverloads constructor(
         // Draw the keyBackground
         keyBackground?.draw(canvas)
         // Switch the character to uppercase if shift is pressed
-        val keyLabel = key.adjustLabelCase(getLocale())
+        val keyLabel = key.adjustLabelCase()
         if (keyLabel.isNotEmpty()) {
             // Use primary color for letters and digits, secondary color for everything else
             paint.color = when {
