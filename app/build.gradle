@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 /*
  * Copyright 2021 LiteKite Startup. All rights reserved.
  *
@@ -15,26 +17,25 @@
  */
 
 plugins {
-    id 'dagger.hilt.android.plugin'
     id 'com.android.application'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
+    alias(libs.plugins.legacy.kapt)
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
-    compileSdkVersion 34
+    compileSdkVersion 36
     defaultConfig {
         applicationId "com.litekite.ime"
         minSdkVersion 24
-        targetSdkVersion 34
-        multiDexEnabled true
+        targetSdkVersion 36
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    namespace 'com.litekite.ime'
     sourceSets {
-        main.java.srcDirs += "src/main/kotlin"
+        main.kotlin.srcDirs += "src/main/kotlin"
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
     buildTypes {
@@ -47,6 +48,7 @@ android {
     buildFeatures {
         viewBinding = true
         dataBinding = true
+        buildConfig = true
     }
     lintOptions {
         baseline file("lint-baseline.xml")
@@ -57,8 +59,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_11
     }
 }
 
@@ -72,7 +77,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(libs.multidex)
     implementation(libs.support.v4)
 
     // Hilt

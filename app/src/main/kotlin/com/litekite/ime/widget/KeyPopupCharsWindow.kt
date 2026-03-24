@@ -17,7 +17,6 @@ package com.litekite.ime.widget
 
 import android.content.Context
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -32,7 +31,7 @@ import com.google.android.material.color.MaterialColors
 import com.litekite.ime.R
 import com.litekite.ime.base.CallbackProvider
 import com.litekite.ime.databinding.WidgetKeyPopupCharBinding
-import java.util.Locale
+import androidx.core.graphics.drawable.toDrawable
 
 /**
  * A Keyboard key characters popup shown above the key that supports multiple character types
@@ -61,15 +60,13 @@ class KeyPopupCharsWindow @JvmOverloads constructor(
             context,
             R.drawable.bg_keyboard_key
         )
-        contentView.background.setTint(
-            MaterialColors.getColor(contentView, R.attr.colorControlHighlight)
+        contentView.background?.setTint(
+            MaterialColors.getColor(contentView, android.R.attr.colorControlHighlight)
         )
         elevation = 10.0F
         animationStyle = android.R.style.Animation_Dialog
-        setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
     }
-
-    private fun getLocale(): Locale = context.resources.configuration.locales[0]
 
     fun showPopupChars(parent: View, key: Keyboard.Key) {
         val popupChars = key.popupKeyboardChars

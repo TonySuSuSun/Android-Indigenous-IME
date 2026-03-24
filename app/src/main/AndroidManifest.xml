@@ -17,8 +17,7 @@
 <!--suppress AndroidUnknownAttribute -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    coreApp="true"
-    package="com.litekite.ime">
+    coreApp="true">
 
     <application
         android:name="com.litekite.ime.app.ImeApp"
@@ -38,8 +37,6 @@
             android:permission="android.permission.BIND_INPUT_METHOD">
             <intent-filter>
                 <action android:name="android.view.InputMethod" />
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <meta-data
                 android:name="android.view.im"

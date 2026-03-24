@@ -38,7 +38,7 @@ class ImeApp : Application() {
          * Logs messages for Debugging Purposes.
          *
          * @param tag     TAG is a class name in which the log come from.
-         * @param message Type of a Log Message.
+         * @param message Type of Log Message.
          */
         fun printLog(tag: String, message: String) {
             if (Log.isLoggable(tag, Log.DEBUG)) {
