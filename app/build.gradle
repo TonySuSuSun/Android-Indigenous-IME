@@ -22,7 +22,6 @@ plugins {
 }
 
 android {
-    namespace 'com.litekite.ime'
     compileSdkVersion 34
     defaultConfig {
         applicationId "com.litekite.ime"

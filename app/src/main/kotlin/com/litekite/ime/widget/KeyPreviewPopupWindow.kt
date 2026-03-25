@@ -29,7 +29,6 @@ import com.litekite.ime.R
 import com.litekite.ime.databinding.WidgetKeyPopupPreviewBinding
 import com.litekite.ime.util.StringUtil.isPunctuation
 import java.util.Locale
-import androidx.core.graphics.drawable.toDrawable
 
 /**
  * A Keyboard key preview popup shown above the key like a glance preview of a typed key.
@@ -53,12 +52,12 @@ class KeyPreviewPopupWindow @JvmOverloads constructor(
     init {
         contentView = binding.root
         contentView.background.setTint(
-            MaterialColors.getColor(contentView, com.google.android.material.R.attr.colorControlHighlight)
+            MaterialColors.getColor(contentView, R.attr.colorControlHighlight)
         )
         elevation = 10.0F
         isTouchable = false
         animationStyle = android.R.style.Animation_Dialog
-        setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
+        setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
 
     private fun getLocale(): Locale = context.resources.configuration.locales[0]
