@@ -186,7 +186,7 @@ class Keyboard(context: Context, layoutRes: Int) {
     /**
      * Key instance for the shift key, if present
      */
-    private val shiftKeys = arrayOf<Key?>(null, null)
+    private val shiftKeys = arrayOf<Keyboard.Key?>(null, null)
 
     /** List of modifier keys such as Shift & Alt, if any */
     private val modifierKeys: ArrayList<Key> = ArrayList()
@@ -459,7 +459,7 @@ class Keyboard(context: Context, layoutRes: Int) {
         internal val verticalGap: Int
 
         /**
-         * All the key codes (Unicode or custom code) that this key could generate,
+         * All the key codes (unicode or custom code) that this key could generate,
          * zeroth being the most important.
          */
         internal var codes = intArrayOf()
@@ -585,7 +585,7 @@ class Keyboard(context: Context, layoutRes: Int) {
          * @param x the x-coordinate of the point
          * @param y the y-coordinate of the point
          *
-         * @return whether the point falls inside the key. If the key is attached to an edge,
+         * @return whether or not the point falls inside the key. If the key is attached to an edge,
          * it will assume that all points between the key and the edge are considered to be inside
          * the key.
          */

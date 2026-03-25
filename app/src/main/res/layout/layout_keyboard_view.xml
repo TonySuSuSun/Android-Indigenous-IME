@@ -14,34 +14,21 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_gravity="center_horizontal|bottom"
+    android:paddingTop="@dimen/keyboard_view_root_padding_top">
 
-    <FrameLayout
+    <com.litekite.ime.widget.KeyboardView
+        android:id="@+id/v_keyboard"
+        style="@style/KeyboardStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|bottom"
-        android:paddingTop="@dimen/keyboard_view_root_padding_top">
+        android:layout_gravity="center_horizontal"
+        android:focusable="true"
+        android:padding="@dimen/keyboard_view_padding"
+        tools:ignore="SpeakableTextPresentCheck" />
 
-        <com.litekite.ime.widget.KeyboardView
-            android:id="@+id/v_keyboard"
-            style="@style/KeyboardStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:focusable="true"
-            android:padding="@dimen/keyboard_view_padding"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-    </FrameLayout>
-
-    <!-- Navigation bar background protection for edge-to-edge -->
-    <View
-        android:id="@+id/navigation_bar_background"
-        android:layout_width="match_parent"
-        android:layout_height="0dp" />
-
-</LinearLayout>
+</FrameLayout>

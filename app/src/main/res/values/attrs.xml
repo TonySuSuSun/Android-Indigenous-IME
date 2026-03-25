@@ -16,8 +16,6 @@
 -->
 <resources>
 
-    <attr name="colorControlHighlight" format="color" />
-
     <declare-styleable name="KeyboardView">
         <attr name="keyBackground" format="reference" />
         <attr name="keyTextColorPrimary" format="color" />

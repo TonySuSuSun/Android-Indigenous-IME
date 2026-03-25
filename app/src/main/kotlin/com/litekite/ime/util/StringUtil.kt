@@ -31,7 +31,7 @@ object StringUtil {
     private val PUNCTUATION_PATTERN = Pattern.compile("[_\\-,.]")
 
     fun String.parseCSV(): IntArray {
-        val size = this.count { char -> char == ',' }
+        val size = this.filter { char -> char == ',' }.count()
         val keyCodes = IntArray(size)
         val tokenizer = StringTokenizer(this, ",")
         val index = 0
@@ -39,7 +39,7 @@ object StringUtil {
             try {
                 keyCodes[index] = tokenizer.nextToken().toInt()
                 index.inc()
-            } catch (_: NumberFormatException) {
+            } catch (e: NumberFormatException) {
                 ImeApp.printLog(TAG, "Error parsing keycodes $this")
             }
         }

@@ -16,16 +16,11 @@
 package com.litekite.ime.service
 
 import android.annotation.SuppressLint
-import android.content.res.Configuration
 import android.inputmethodservice.InputMethodService
-import android.os.Build
 import android.os.LocaleList
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.view.WindowInsets
 import android.view.inputmethod.EditorInfo
-import androidx.core.view.updateLayoutParams
 import com.google.android.material.color.MaterialColors
 import com.litekite.ime.R
 import com.litekite.ime.app.ImeApp
@@ -105,26 +100,16 @@ class ImeService : InputMethodService(), ConfigController.Callback {
         configController.addCallback(this)
     }
 
-    @Suppress("DEPRECATION")
     override fun onThemeChanged() {
         super.onThemeChanged()
         ImeApp.printLog(TAG, "onThemeChanged:")
         // Applying theme to resolve attributes of the current theme
         theme.applyStyle(R.style.Theme_AndroidIME, true)
-        
-        // Check if binding is initialized before using it to avoid NPE
-        if (_binding == null) return
-
         // Changing nav bar background
-        val navBarColor = MaterialColors.getColor(
+        window.window?.navigationBarColor = MaterialColors.getColor(
             binding.vKeyboard,
             android.R.attr.navigationBarColor
         )
-        if (Build.VERSION.SDK_INT < 35) {
-            window.window?.navigationBarColor = navBarColor
-        } else {
-            binding.navigationBarBackground.setBackgroundColor(navBarColor)
-        }
         // Recreate all the keyboard layouts to reflect theme change
         parseKeyboardLayoutFromXml()
         binding.vKeyboard.setKeyboard(qwertyKeyboard)
@@ -134,9 +119,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
         super.onDeviceOrientationChanged()
         // Recreate all the keyboard layouts to reflect device orientation change
         parseKeyboardLayoutFromXml()
-        if (_binding != null) {
-            binding.vKeyboard.setKeyboard(qwertyKeyboard)
-        }
+        binding.vKeyboard.setKeyboard(qwertyKeyboard)
     }
 
     private fun parseKeyboardLayoutFromXml() {
@@ -149,33 +132,22 @@ class ImeService : InputMethodService(), ConfigController.Callback {
 
     @SuppressLint("DiscouragedApi")
     private fun createKeyboard(layoutXml: String): Keyboard {
-        val overrideConfig = Configuration(resources.configuration)
+        val overrideConfig = resources.configuration
         // Set default locale
-        val localeList = LocaleList(Locale.forLanguageTag(DEFAULT_LOCALE))
+        val localeList = LocaleList(Locale(DEFAULT_LOCALE))
         overrideConfig.setLocales(localeList)
         // Update configuration
-        val context = createConfigurationContext(overrideConfig)
+        createConfigurationContext(overrideConfig)
         // Keyboard layout
         return Keyboard(
-            context,
-            context.resources.getIdentifier(layoutXml, Keyboard.DEF_TYPE, packageName)
+            this,
+            resources.getIdentifier(layoutXml, Keyboard.DEF_TYPE, packageName)
         )
     }
 
     override fun onCreateInputView(): View {
         ImeApp.printLog(TAG, "onCreateInputView:")
         _binding = LayoutKeyboardViewBinding.inflate(LayoutInflater.from(this))
-        // On Android 15 (API level 35) and higher, edge-to-edge is enforced.
-        // We use a custom view to protect the navigation bar area.
-        if (Build.VERSION.SDK_INT >= 35) {
-            binding.root.setOnApplyWindowInsetsListener { _, insets ->
-                val navBarInsets = insets.getInsets(WindowInsets.Type.navigationBars())
-                binding.navigationBarBackground.updateLayoutParams<ViewGroup.LayoutParams> {
-                    height = navBarInsets.bottom
-                }
-                insets
-            }
-        }
         return binding.root
     }
 
@@ -194,9 +166,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
         ImeApp.printLog(TAG, "onDestroy:")
         // Removing callback
         configController.removeCallback(this)
-        if (_binding != null) {
-            binding.vKeyboard.removeCallback(keyboardActionListener)
-        }
+        binding.vKeyboard.removeCallback(keyboardActionListener)
         _binding = null
         super.onDestroy()
     }
