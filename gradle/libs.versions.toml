@@ -1,13 +1,13 @@
 [versions]
 
 # Plugins
-android-gradle-plugin = "7.4.2"
-gradle = "7.5.0"
+android-gradle-plugin = "8.1.4"
+gradle = "8.1.1"
 multidex = "1.0.3"
-spotless-plugin-gradle = "5.12.5"
+spotless-plugin-gradle = "6.23.3"
 
 # Kotlin
-kotlin = "1.9.20"
+kotlin = "1.9.22"
 ktlint = "0.41.0"
 
 # AndroidX
@@ -46,7 +46,7 @@ androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
 
 # UI
-material = { module = "com.google.android.material:material", version = "1.6.0" }
+material = { module = "com.google.android.material:material", version = "1.10.0" }
 
 # Hilt DI
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
