@@ -19,7 +19,7 @@
     <string name="app_name">kBoard</string>
 
     <!-- Description for English (US) keyboard subtype [CHAR LIMIT=25]
-    (US) should be an abbreviation of United States to fit in the CHAR LIMIT. -->
+    (US) should be an abbreviation of the United States to fit in the CHAR LIMIT. -->
     <string name="subtype_en_US">English (US)</string>
 
     <!-- Alternative keys for a. [DO NOT TRANSLATE] -->

@@ -33,6 +33,7 @@ import com.litekite.ime.R
 import com.litekite.ime.base.CallbackProvider
 import com.litekite.ime.databinding.WidgetKeyPopupCharBinding
 import java.util.Locale
+import androidx.core.graphics.drawable.toDrawable
 
 /**
  * A Keyboard key characters popup shown above the key that supports multiple character types
@@ -66,7 +67,7 @@ class KeyPopupCharsWindow @JvmOverloads constructor(
         )
         elevation = 10.0F
         animationStyle = android.R.style.Animation_Dialog
-        setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
     }
 
     private fun getLocale(): Locale = context.resources.configuration.locales[0]
