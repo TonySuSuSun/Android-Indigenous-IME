@@ -36,8 +36,7 @@
             app:keyLabel="t" />
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
-            app:keyLabel="y"
-            app:popupCharacters="@string/alternates_for_y" />
+            app:keyLabel="y" />
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="u"/>
