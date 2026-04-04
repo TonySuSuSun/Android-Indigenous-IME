@@ -39,7 +39,7 @@ object StringUtil {
             try {
                 keyCodes[index] = tokenizer.nextToken().toInt()
                 index.inc()
-            } catch (e: NumberFormatException) {
+            } catch (_: NumberFormatException) {
                 ImeApp.printLog(TAG, "Error parsing keycodes $this")
             }
         }
