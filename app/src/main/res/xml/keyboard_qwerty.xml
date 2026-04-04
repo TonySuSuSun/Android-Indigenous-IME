@@ -37,11 +37,11 @@
             app:keyLabel="r" />
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
-            app:keyLabel="t" />
+            app:keyLabel="t"
+            app:popupCharacters="@string/alternates_for_t"/>
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
-            app:keyLabel="y"
-            app:popupCharacters="@string/alternates_for_y" />
+            app:keyLabel="y" />
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="u"
@@ -61,7 +61,6 @@
 
     <Row>
         <Key
-            app:keyHorizontalGap="@dimen/keyboard_half_key_size"
             app:keyLabel="a"
             app:popupCharacters="@string/alternates_for_a" />
         <Key
@@ -70,7 +69,8 @@
             app:popupCharacters="@string/alternates_for_s" />
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
-            app:keyLabel="d" />
+            app:keyLabel="d"
+            app:popupCharacters="@string/alternates_for_d"/>
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="f" />
@@ -79,7 +79,8 @@
             app:keyLabel="g" />
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
-            app:keyLabel="h" />
+            app:keyLabel="h"
+            app:popupCharacters="@string/alternates_for_h"/>
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="j" />
@@ -90,6 +91,11 @@
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="l"
             app:popupCharacters="@string/alternates_for_l" />
+
+        <Key
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyLabel="'"
+            app:popupCharacters="@string/alternates_for_symbol" />
     </Row>
 
     <Row>
@@ -102,15 +108,13 @@
             app:keyIcon="@drawable/ic_keyboard_key_shift" />
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
-            app:keyLabel="z"
-            app:popupCharacters="@string/alternates_for_z" />
+            app:keyLabel="z" />
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="x" />
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
-            app:keyLabel="c"
-            app:popupCharacters="@string/alternates_for_c" />
+            app:keyLabel="c" />
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="v" />
@@ -149,12 +153,11 @@
         <Key
             app:codes="@integer/keycode_space"
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
-            app:keyLabel="English"
+            app:keyLabel="原住民語輸入法"
             app:keyWidth="@dimen/keyboard_key_space_bar_width" />
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
-            app:keyLabel="."
-            app:popupCharacters="@string/alternates_for_symbol"/>
+            app:keyLabel="." />
         <Key
             app:codes="@integer/keycode_enter"
             app:keyEdgeFlags="right"

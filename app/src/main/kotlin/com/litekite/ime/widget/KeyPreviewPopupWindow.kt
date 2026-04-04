@@ -17,7 +17,6 @@ package com.litekite.ime.widget
 
 import android.content.Context
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -28,7 +27,6 @@ import com.google.android.material.color.MaterialColors
 import com.litekite.ime.R
 import com.litekite.ime.databinding.WidgetKeyPopupPreviewBinding
 import com.litekite.ime.util.StringUtil.isPunctuation
-import java.util.Locale
 import androidx.core.graphics.drawable.toDrawable
 
 /**
@@ -60,8 +58,6 @@ class KeyPreviewPopupWindow @JvmOverloads constructor(
         animationStyle = android.R.style.Animation_Dialog
         setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
     }
-
-    private fun getLocale(): Locale = context.resources.configuration.locales[0]
 
     fun showPreview(parent: View, key: Keyboard.Key) {
         val keyLabel = key.adjustLabelCase()

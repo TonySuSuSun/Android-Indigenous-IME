@@ -61,18 +61,10 @@ class Keyboard(context: Context, layoutRes: Int) {
 
     companion object {
 
-        /** Language types*/
-        const val English = 0
-        const val Amis = 1
-        const val Paiwan = 2
-
         /** Keyboard types */
         const val DEF_TYPE = "xml"
         const val LAYOUT_KEYBOARD_QWERTY = "keyboard_qwerty"
         const val LAYOUT_KEYBOARD_SYMBOL = "keyboard_symbol"
-
-        const val LAYOUT_KEYBOARD_AMIS = "keyboard_amis"
-        const val LAYOUT_KEYBOARD_PAIWAN = "keyboard_paiwan"
 
         /** Xml layout tags */
         const val TAG_KEYBOARD = "Keyboard"
@@ -97,21 +89,6 @@ class Keyboard(context: Context, layoutRes: Int) {
         const val KEYCODE_NUM_KEYBOARD = -9
         const val KEYCODE_ALPHA_KEYBOARD = -10
         const val KEYCODE_LANGUAGE_KEYBOARD = -99
-
-        const val ae = -11
-        const val dh = -12
-        const val dj = -13
-        const val dr = -14
-        const val hl = -15
-        const val lh = -16
-        const val lj = -17
-        const val lr = -18
-        const val ng = -19
-        const val oe = -20
-        const val sh = -21
-        const val th = -22
-        const val tj = -23
-        const val tr = -24
 
         const val NOT_A_KEY = -1
 
@@ -186,7 +163,7 @@ class Keyboard(context: Context, layoutRes: Int) {
     /**
      * Key instance for the shift key, if present
      */
-    private val shiftKeys = arrayOf<Keyboard.Key?>(null, null)
+    private val shiftKeys = arrayOf<Key?>(null, null)
 
     /** List of modifier keys such as Shift & Alt, if any */
     private val modifierKeys: ArrayList<Key> = ArrayList()
@@ -615,10 +592,7 @@ class Keyboard(context: Context, layoutRes: Int) {
         }
 
         fun adjustPopupCharCase(popupChar: Char): String {
-            var popupCharStr = popupChar.toString()
-            if (isShifted && label.isNotEmpty() && Character.isLowerCase(popupChar)) {
-                popupCharStr = popupCharStr.replaceFirstChar(Char::uppercase)
-            }
+            val popupCharStr = popupChar.toString()
             return popupCharStr
         }
 

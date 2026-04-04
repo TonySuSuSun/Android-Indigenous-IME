@@ -31,7 +31,7 @@ object StringUtil {
     private val PUNCTUATION_PATTERN = Pattern.compile("[_\\-,.]")
 
     fun String.parseCSV(): IntArray {
-        val size = this.filter { char -> char == ',' }.count()
+        val size = this.count { char -> char == ',' }
         val keyCodes = IntArray(size)
         val tokenizer = StringTokenizer(this, ",")
         val index = 0

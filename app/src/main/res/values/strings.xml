@@ -16,35 +16,35 @@
 -->
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="UnusedResources">
 
-    <string name="app_name">kBoard</string>
+    <string name="app_name">原住民語輸入法</string>
 
     <!-- Description for English (US) keyboard subtype [CHAR LIMIT=25]
     (US) should be an abbreviation of the United States to fit in the CHAR LIMIT. -->
-    <string name="subtype_en_US">English (US)</string>
+    <string name="subtype">原住民語</string>
 
     <!-- Alternative keys for a. [DO NOT TRANSLATE] -->
-    <string name="alternates_for_a">aàáâäæãåāª</string>
-    <!-- Alternative keys for c. [DO NOT TRANSLATE] -->
-    <string name="alternates_for_c">cçćč</string>
+    <string name="alternates_for_a">a|ae|</string>
+    <!-- Alternative keys for d. [DO NOT TRANSLATE] -->
+    <string name="alternates_for_d">d|dh|dj|dr|</string>
     <!-- Alternative keys for e. [DO NOT TRANSLATE] -->
-    <string name="alternates_for_e">eèéêëēėę</string>
+    <string name="alternates_for_e">e|é|</string>
+    <!-- Alternative keys for h. [DO NOT TRANSLATE] -->
+    <string name="alternates_for_h">h|hl|</string>
     <!-- Alternative keys for i. [DO NOT TRANSLATE] -->
-    <string name="alternates_for_i">iîïíīįì</string>
+    <string name="alternates_for_i">i|ɨ|</string>
     <!-- Alternative keys for l. [DO NOT TRANSLATE] -->
-    <string name="alternates_for_l">lł</string>
+    <string name="alternates_for_l">l|lj|lh|</string>
     <!-- Alternative keys for n. [DO NOT TRANSLATE] -->
-    <string name="alternates_for_n">nñń</string>
+    <string name="alternates_for_n">n|ng|</string>
     <!-- Alternative keys for o. [DO NOT TRANSLATE] -->
-    <string name="alternates_for_o">oôöòóœøōõº</string>
+    <string name="alternates_for_o">o|oe|</string>
     <!-- Alternative keys for s. [DO NOT TRANSLATE] -->
-    <string name="alternates_for_s">sßśš$</string>
+    <string name="alternates_for_s">s|sh|</string>
+    <!-- Alternative keys for t. [DO NOT TRANSLATE] -->
+    <string name="alternates_for_t">t|th|tj|tr|</string>
     <!-- Alternative keys for u. [DO NOT TRANSLATE] -->
-    <string name="alternates_for_u">uûüùúū</string>
-    <!-- Alternative keys for y. [DO NOT TRANSLATE] -->
-    <string name="alternates_for_y">yÿ</string>
-    <!-- Alternative keys for z. [DO NOT TRANSLATE] -->
-    <string name="alternates_for_z">zžźż</string>
+    <string name="alternates_for_u">u|ʉ|</string>
     <!-- Alternative keys for symbol. [DO NOT TRANSLATE] -->
-    <string name="alternates_for_symbol">&amp;%+"-:'@\n;/()#!,?</string>
+    <string name="alternates_for_symbol">\'|^|-|:|</string>
 
 </resources>
