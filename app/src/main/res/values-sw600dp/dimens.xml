@@ -19,6 +19,7 @@
     <dimen name="keyboard_key_size">51dp</dimen>
     <dimen name="keyboard_half_key_size">25dp</dimen>
     <dimen name="keyboard_double_key_size">76dp</dimen>
+    <dimen name="keyboard_big_key_size">176dp</dimen>
 
     <dimen name="keyboard_key_vertical_gap">3dp</dimen>
     <dimen name="keyboard_key_horizontal_gap">3dp</dimen>

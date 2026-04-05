@@ -22,5 +22,6 @@
     <integer name="keycode_space">32</integer>
     <integer name="keycode_enter">10</integer>
     <integer name="keycode_close_keyboard">-99</integer>
+    <integer name="keycode_auto_keyboard">-10</integer>
 
 </resources>

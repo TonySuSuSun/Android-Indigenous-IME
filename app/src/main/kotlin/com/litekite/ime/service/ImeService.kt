@@ -172,14 +172,11 @@ class ImeService : InputMethodService(), ConfigController.Callback {
                 Keyboard.KEYCODE_MAIN_KEYBOARD -> {
                     binding.vKeyboard.setKeyboard(qwertyKeyboard)
                 }
-                Keyboard.KEYCODE_NUM_KEYBOARD -> {
-                    // No number keyboard layout support.
-                }
-                Keyboard.KEYCODE_ALPHA_KEYBOARD -> {
-                    // No alphanumeric keyboard layout support.
-                }
                 Keyboard.KEYCODE_LANGUAGE_KEYBOARD -> {
                     // TODO: 跳出語言選單
+                }
+                Keyboard.KEYCODE_AUTO_KEYBOARD -> {
+                    // TODO: 自動選字功能
                 }
                 Keyboard.KEYCODE_CYCLE_CHAR -> {
                     val text = currentInputConnection.getTextBeforeCursor(1, 0)

@@ -23,6 +23,22 @@
 
     <Row>
         <Key
+            app:codes="@integer/keycode_auto_keyboard"
+            app:keyEdgeFlags="left"
+            app:keyWidth="@dimen/keyboard_big_key_size" />
+        <Key
+            app:codes="@integer/keycode_auto_keyboard"
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyWidth="@dimen/keyboard_big_key_size" />
+        <Key
+            app:codes="@integer/keycode_auto_keyboard"
+            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
+            app:keyWidth="@dimen/keyboard_big_key_size"
+            app:keyEdgeFlags="right" />
+    </Row>
+
+    <Row>
+        <Key
             app:keyEdgeFlags="left"
             app:keyLabel="1" />
         <Key
@@ -51,7 +67,8 @@
             app:keyLabel="9" />
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
-            app:keyLabel="0" />
+            app:keyLabel="0"
+            app:keyEdgeFlags="right" />
     </Row>
 
     <Row>
@@ -81,10 +98,11 @@
             app:keyLabel="(" />
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
-            app:keyLabel=")"/>
+            app:keyLabel=")" />
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
-            app:keyLabel="/"/>
+            app:keyLabel="/"
+            app:keyEdgeFlags="right" />
     </Row>
 
     <Row>
