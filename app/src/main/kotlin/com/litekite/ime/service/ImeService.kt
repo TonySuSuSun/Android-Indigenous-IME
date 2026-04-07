@@ -16,11 +16,15 @@
 package com.litekite.ime.service
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.inputmethodservice.InputMethodService
 import android.os.LocaleList
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.PopupWindow
 import com.google.android.material.color.MaterialColors
 import com.litekite.ime.R
 import com.litekite.ime.app.ImeApp
@@ -33,6 +37,7 @@ import com.litekite.ime.widget.KeyboardView
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 import javax.inject.Inject
+import androidx.core.graphics.drawable.toDrawable
 
 /**
  * @author Vignesh S
@@ -49,6 +54,8 @@ class ImeService : InputMethodService(), ConfigController.Callback {
         private const val DEFAULT_LOCALE = "en"
         private const val IME_ACTION_CUSTOM_LABEL = EditorInfo.IME_MASK_ACTION + 1
     }
+
+    var currentLanguage = 1
 
     @Inject
     lateinit var configController: ConfigController
@@ -173,10 +180,10 @@ class ImeService : InputMethodService(), ConfigController.Callback {
                     binding.vKeyboard.setKeyboard(qwertyKeyboard)
                 }
                 Keyboard.KEYCODE_LANGUAGE_KEYBOARD -> {
-                    // TODO: 跳出語言選單
+                    showLanguagePopup()
                 }
                 Keyboard.KEYCODE_AUTO_KEYBOARD -> {
-                    // TODO: 自動選字功能
+                    // TODO: 輸出自動選字
                 }
                 Keyboard.KEYCODE_CYCLE_CHAR -> {
                     val text = currentInputConnection.getTextBeforeCursor(1, 0)
@@ -252,6 +259,122 @@ class ImeService : InputMethodService(), ConfigController.Callback {
             commitText = commitText.replaceFirstChar(Char::uppercase)
         }
         ImeApp.printLog(TAG, "commitText: $commitText")
-        currentInputConnection.commitText(commitText,1)
+        currentInputConnection.commitText(commitText, 1)
     }
+
+    @SuppressLint("InflateParams")
+    private fun showLanguagePopup() {
+        val inflater = LayoutInflater.from(this)
+        val popupView = inflater.inflate(R.layout.language_menu, null)
+
+        updateLanguage(popupView)
+
+        val popupWindow = PopupWindow(
+            popupView,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            true
+        )
+
+        popupWindow.isFocusable = true
+        popupWindow.isOutsideTouchable = true
+        popupWindow.setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
+
+        val keyboardView = binding.vKeyboard
+        val location = IntArray(2)
+        keyboardView.getLocationOnScreen(location)
+
+        val key = keyboardView.keyboard?.keys?.find { it.codes.contains(-99) }
+
+        key?.let {
+            val x = location[0] + it.x
+            val y = location[1] + it.y
+
+            popupView.measure(
+                View.MeasureSpec.UNSPECIFIED,
+                View.MeasureSpec.UNSPECIFIED
+            )
+
+            popupWindow.showAtLocation(
+                keyboardView,
+                Gravity.NO_GRAVITY,
+                x,
+                y - 3440
+            )
+        }
+
+        val clickListener = View.OnClickListener { view ->
+            when (view.id) {
+                R.id.Amis -> currentLanguage = 1
+                R.id.Atayal -> currentLanguage = 2
+                R.id.Paiwan -> currentLanguage = 3
+                R.id.Bunun -> currentLanguage = 4
+                R.id.Pinuyumayan -> currentLanguage = 5
+                R.id.Rukai -> currentLanguage = 6
+                R.id.Cou -> currentLanguage = 7
+                R.id.SaiSiyat -> currentLanguage = 8
+                R.id.Tao -> currentLanguage = 9
+                R.id.Thau -> currentLanguage = 10
+                R.id.Kebalan -> currentLanguage = 11
+                R.id.Truku -> currentLanguage = 12
+                R.id.Sakizaya -> currentLanguage = 13
+                R.id.Seediq -> currentLanguage = 14
+                R.id.Hlaalua -> currentLanguage = 15
+                R.id.Kanakanavu -> currentLanguage = 16
+            }
+            updateLanguage(popupView)
+            popupWindow.dismiss()
+        }
+
+        val ids = listOf(
+            R.id.Amis,
+            R.id.Atayal,
+            R.id.Paiwan,
+            R.id.Bunun,
+            R.id.Pinuyumayan,
+            R.id.Rukai,
+            R.id.Cou,
+            R.id.SaiSiyat,
+            R.id.Tao,
+            R.id.Thau,
+            R.id.Kebalan,
+            R.id.Truku,
+            R.id.Sakizaya,
+            R.id.Seediq,
+            R.id.Hlaalua,
+            R.id.Kanakanavu
+        )
+
+        ids.forEach {
+            popupView.findViewById<View>(it).setOnClickListener(clickListener)
+        }
+    }
+
+    fun updateLanguage(view: View) {
+        val map = mapOf(
+            1 to R.id.Amis,
+            2 to R.id.Atayal,
+            3 to R.id.Paiwan,
+            4 to R.id.Bunun,
+            5 to R.id.Pinuyumayan,
+            6 to R.id.Rukai,
+            7 to R.id.Cou,
+            8 to R.id.SaiSiyat,
+            9 to R.id.Tao,
+            10 to R.id.Thau,
+            11 to R.id.Kebalan,
+            12 to R.id.Truku,
+            13 to R.id.Sakizaya,
+            14 to R.id.Seediq,
+            15 to R.id.Hlaalua,
+            16 to R.id.Kanakanavu
+        )
+        map.values.forEach { id ->
+            view.findViewById<View>(id).setBackgroundColor(Color.TRANSPARENT)
+        }
+        map[currentLanguage]?.let { id ->
+            view.findViewById<View>(id).setBackgroundColor(Color.GREEN)
+        }
+    }
+
 }
