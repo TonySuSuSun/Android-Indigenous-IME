@@ -48,21 +48,21 @@
     <string name="alternates_for_symbol">\'|^|-|:|</string>
 
 
-    <string name="Amis">阿美語</string>
-    <string name="Atayal">泰雅語</string>
-    <string name="Paiwan">排灣語</string>
-    <string name="Bunun">布農語</string>
-    <string name="Pinuyumayan">卑南語</string>
-    <string name="Rukai">魯凱語</string>
-    <string name="Cou">鄒語</string>
-    <string name="SaiSiyat">賽夏語</string>
-    <string name="Tao">達悟語</string>
-    <string name="Thau">邵語</string>
-    <string name="Kebalan">噶瑪蘭語</string>
-    <string name="Truku">太魯閣語</string>
-    <string name="Sakizaya">撒奇萊雅語</string>
-    <string name="Seediq">賽德克語</string>
-    <string name="Hlaalua">拉阿魯哇語</string>
-    <string name="Kanakanavu">卡那卡那富語</string>
+    <string name="Amis">阿美語 (Amis)</string>
+    <string name="Atayal">泰雅語 (Atayal)</string>
+    <string name="Pinayuanan">排灣語 (Pinayuanan)</string>
+    <string name="Bunun">布農語 (Bunun)</string>
+    <string name="Pinuyumayan">卑南語 (Pinuyumayan)</string>
+    <string name="Drekay">魯凱語 (Drekay)</string>
+    <string name="Cou">鄒語 (Cou)</string>
+    <string name="SaiSiyat">賽夏語 (SaySiyat)</string>
+    <string name="Tao">達悟語 (Tao)</string>
+    <string name="Thau">邵語 (Thau)</string>
+    <string name="Kevalan">噶瑪蘭語 (Kavalan)</string>
+    <string name="Truku">太魯閣語 (Truku)</string>
+    <string name="Sakizaya">撒奇萊雅語 (Sakizaya)</string>
+    <string name="Seediq">賽德克語 (Seediq)</string>
+    <string name="Hlaʼalua">拉阿魯哇語 (Hlaʼalua)</string>
+    <string name="Kanakanavu">卡那卡那富語 (Kanakanavu)</string>
 
 </resources>

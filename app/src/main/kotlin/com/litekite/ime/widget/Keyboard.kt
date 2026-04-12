@@ -472,7 +472,7 @@ class Keyboard(context: Context, layoutRes: Int) {
         private var outputText: CharSequence = ""
 
         /** Label to display  */
-        private var label: CharSequence = ""
+        var label: CharSequence = ""
 
         /** Icon to display instead of a label. Icon takes precedence over a label  */
         internal val icon: Drawable?

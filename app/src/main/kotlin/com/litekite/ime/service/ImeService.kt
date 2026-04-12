@@ -56,6 +56,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
     }
 
     var currentLanguage = 1
+    val languageText = arrayOf("Amis", "Atayal", "Pinayuanan", "Bunun", "Pinuyumayan", "Drekay", "Cou", "SaiSiyat", "Tao", "Thau", "Kevalan", "Truku", "Sakizaya", "Seediq", "Hlaʼalua", "Kanakanavu")
 
     @Inject
     lateinit var configController: ConfigController
@@ -140,6 +141,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
         binding.vKeyboard.setKeyboard(qwertyKeyboard)
         binding.vKeyboard.addCallback(keyboardActionListener)
         binding.vKeyboard.setShifted(info.initialCapsMode != 0)
+        changeLanguageText()
     }
 
     override fun onEvaluateFullscreenMode(): Boolean = false
@@ -183,7 +185,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
                     showLanguagePopup()
                 }
                 Keyboard.KEYCODE_AUTO_KEYBOARD -> {
-                    // TODO: 輸出自動選字
+                    // TODO: 輸出自動選字8
                 }
                 Keyboard.KEYCODE_CYCLE_CHAR -> {
                     val text = currentInputConnection.getTextBeforeCursor(1, 0)
@@ -307,41 +309,42 @@ class ImeService : InputMethodService(), ConfigController.Callback {
             when (view.id) {
                 R.id.Amis -> currentLanguage = 1
                 R.id.Atayal -> currentLanguage = 2
-                R.id.Paiwan -> currentLanguage = 3
+                R.id.Pinayuanan -> currentLanguage = 3
                 R.id.Bunun -> currentLanguage = 4
                 R.id.Pinuyumayan -> currentLanguage = 5
-                R.id.Rukai -> currentLanguage = 6
+                R.id.Drekay -> currentLanguage = 6
                 R.id.Cou -> currentLanguage = 7
                 R.id.SaiSiyat -> currentLanguage = 8
                 R.id.Tao -> currentLanguage = 9
                 R.id.Thau -> currentLanguage = 10
-                R.id.Kebalan -> currentLanguage = 11
+                R.id.Kevalan -> currentLanguage = 11
                 R.id.Truku -> currentLanguage = 12
                 R.id.Sakizaya -> currentLanguage = 13
                 R.id.Seediq -> currentLanguage = 14
-                R.id.Hlaalua -> currentLanguage = 15
+                R.id.Hlaʼalua -> currentLanguage = 15
                 R.id.Kanakanavu -> currentLanguage = 16
             }
             updateLanguage(popupView)
             popupWindow.dismiss()
+            keyboardView.invalidateAllKeys()
         }
 
         val ids = listOf(
             R.id.Amis,
             R.id.Atayal,
-            R.id.Paiwan,
+            R.id.Pinayuanan,
             R.id.Bunun,
             R.id.Pinuyumayan,
-            R.id.Rukai,
+            R.id.Drekay,
             R.id.Cou,
             R.id.SaiSiyat,
             R.id.Tao,
             R.id.Thau,
-            R.id.Kebalan,
+            R.id.Kevalan,
             R.id.Truku,
             R.id.Sakizaya,
             R.id.Seediq,
-            R.id.Hlaalua,
+            R.id.Hlaʼalua,
             R.id.Kanakanavu
         )
 
@@ -354,19 +357,19 @@ class ImeService : InputMethodService(), ConfigController.Callback {
         val map = mapOf(
             1 to R.id.Amis,
             2 to R.id.Atayal,
-            3 to R.id.Paiwan,
+            3 to R.id.Pinayuanan,
             4 to R.id.Bunun,
             5 to R.id.Pinuyumayan,
-            6 to R.id.Rukai,
+            6 to R.id.Drekay,
             7 to R.id.Cou,
             8 to R.id.SaiSiyat,
             9 to R.id.Tao,
             10 to R.id.Thau,
-            11 to R.id.Kebalan,
+            11 to R.id.Kevalan,
             12 to R.id.Truku,
             13 to R.id.Sakizaya,
             14 to R.id.Seediq,
-            15 to R.id.Hlaalua,
+            15 to R.id.Hlaʼalua,
             16 to R.id.Kanakanavu
         )
         map.values.forEach { id ->
@@ -375,6 +378,13 @@ class ImeService : InputMethodService(), ConfigController.Callback {
         map[currentLanguage]?.let { id ->
             view.findViewById<View>(id).setBackgroundColor(Color.GREEN)
         }
+        changeLanguageText()
     }
 
+    fun changeLanguageText() {
+        val qwertyKey = qwertyKeyboard.keys.find { it.codes.contains(32) }
+        val symbolKey = symbolKeyboard.keys.find { it.codes.contains(32) }
+        qwertyKey?.label = languageText[currentLanguage - 1]
+        symbolKey?.label = languageText[currentLanguage - 1]
+    }
 }

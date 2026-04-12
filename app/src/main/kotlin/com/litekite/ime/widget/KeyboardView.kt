@@ -407,7 +407,7 @@ class KeyboardView @JvmOverloads constructor(
      * draws the cached buffer.
      * @see [invalidateKey]
      */
-    private fun invalidateAllKeys() {
+    fun invalidateAllKeys() {
         dirtyRect.union(0, 0, width, height)
         drawPending = true
         postInvalidate()

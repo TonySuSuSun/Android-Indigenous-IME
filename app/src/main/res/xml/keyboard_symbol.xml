@@ -155,7 +155,7 @@
         <Key
             app:codes="@integer/keycode_space"
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
-            app:keyLabel="原住民語輸入法"
+            app:keyLabel=""
             app:keyWidth="@dimen/keyboard_key_space_bar_width" />
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
