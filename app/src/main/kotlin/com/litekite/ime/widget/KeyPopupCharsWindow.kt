@@ -61,7 +61,7 @@ class KeyPopupCharsWindow @JvmOverloads constructor(
             R.drawable.bg_keyboard_key
         )
         contentView.background.setTint(
-            MaterialColors.getColor(contentView, R.attr.colorControlHighlight)
+            MaterialColors.getColor(contentView, androidx.appcompat.R.attr.colorControlHighlight)
         )
         elevation = 10.0F
         animationStyle = android.R.style.Animation_Dialog

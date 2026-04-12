@@ -27,6 +27,7 @@ buildscript {
         classpath(libs.kotlin.plugin.gradle)
         classpath(libs.spotless.plugin.gradle)
         classpath(libs.hilt.plugin.gradle)
+        classpath(libs.ksp.plugin.gradle)
     }
 }
 
