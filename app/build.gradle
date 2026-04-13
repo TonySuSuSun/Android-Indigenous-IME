@@ -17,8 +17,6 @@
 plugins {
     id 'dagger.hilt.android.plugin'
     id 'com.android.application'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
     id 'com.google.devtools.ksp'
 }
 
@@ -29,14 +27,15 @@ android {
         applicationId "com.litekite.ime"
         minSdkVersion 24
         targetSdkVersion 34
-        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     sourceSets {
-        main.java.srcDirs += "src/main/kotlin"
+        main {
+            kotlin.srcDirs += "src/main/kotlin"
+        }
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
     buildTypes {
@@ -59,35 +58,27 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11
-    }
 }
 
-kapt {
-    correctErrorTypes true
-}
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation(libs.kotlin.stdlib)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(libs.multidex)
     implementation(libs.support.v4)
 
     // Hilt
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     // Hilt - Instrumentation test helpers
     androidTestImplementation(libs.hilt.testing)
-    kaptAndroidTest(libs.hilt.compiler)
+    kspAndroidTest(libs.hilt.compiler)
 
     // Hilt - Local unit test helpers
     testImplementation(libs.hilt.testing)
-    kaptTest(libs.hilt.compiler)
+    kspTest(libs.hilt.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

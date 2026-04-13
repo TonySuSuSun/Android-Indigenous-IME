@@ -23,15 +23,15 @@
 
     <Row>
         <Key
-            app:codes="@integer/keycode_auto_keyboard"
+            app:codes="@integer/keycode_auto_fill_1"
             app:keyEdgeFlags="left"
             app:keyWidth="@dimen/keyboard_big_key_size" />
         <Key
-            app:codes="@integer/keycode_auto_keyboard"
+            app:codes="@integer/keycode_auto_fill_2"
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyWidth="@dimen/keyboard_big_key_size" />
         <Key
-            app:codes="@integer/keycode_auto_keyboard"
+            app:codes="@integer/keycode_auto_fill_3"
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyWidth="@dimen/keyboard_big_key_size"
             app:keyEdgeFlags="right" />
@@ -155,7 +155,6 @@
         <Key
             app:codes="@integer/keycode_space"
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
-            app:keyLabel=""
             app:keyWidth="@dimen/keyboard_key_space_bar_width" />
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"

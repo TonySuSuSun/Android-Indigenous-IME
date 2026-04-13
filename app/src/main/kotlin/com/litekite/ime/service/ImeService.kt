@@ -184,8 +184,17 @@ class ImeService : InputMethodService(), ConfigController.Callback {
                 Keyboard.KEYCODE_LANGUAGE_KEYBOARD -> {
                     showLanguagePopup()
                 }
-                Keyboard.KEYCODE_AUTO_KEYBOARD -> {
-                    // TODO: 輸出自動選字8
+                Keyboard.KEYCODE_AUTO_FILL_1 -> {
+                    val text = qwertyKeyboard.keys.find { it.codes.contains(primaryCode) }?.label
+                    currentInputConnection.commitText(text, 1)
+                }
+                Keyboard.KEYCODE_AUTO_FILL_2 -> {
+                    val text = qwertyKeyboard.keys.find { it.codes.contains(primaryCode) }?.label
+                    currentInputConnection.commitText(text, 1)
+                }
+                Keyboard.KEYCODE_AUTO_FILL_3 -> {
+                    val text = qwertyKeyboard.keys.find { it.codes.contains(primaryCode) }?.label
+                    currentInputConnection.commitText(text, 1)
                 }
                 Keyboard.KEYCODE_CYCLE_CHAR -> {
                     val text = currentInputConnection.getTextBeforeCursor(1, 0)
