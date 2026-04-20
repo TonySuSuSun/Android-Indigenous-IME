@@ -84,7 +84,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    def room_version = libs.versions.room.get()
+    def room_version = libs.versions.room.version.get()
 
     implementation "androidx.room:room-runtime:$room_version"
 
@@ -93,13 +93,13 @@ dependencies {
     ksp "androidx.room:room-compiler:$room_version"
 
     // optional - RxJava2 support for Room
-    implementation "androidx.room:room-rxjava2:$room_version"
+    implementation libs.androidx.room.rxjava2
 
     // optional - RxJava3 support for Room
-    implementation "androidx.room:room-rxjava3:$room_version"
+    implementation libs.androidx.room.rxjava3
 
     // optional - Guava support for Room, including Optional and ListenableFuture
-    implementation "androidx.room:room-guava:$room_version"
+    implementation libs.androidx.room.guava
 
     // optional - Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
