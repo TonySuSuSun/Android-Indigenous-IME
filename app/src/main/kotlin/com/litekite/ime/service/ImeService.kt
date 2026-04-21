@@ -38,6 +38,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 import javax.inject.Inject
 import androidx.core.graphics.drawable.toDrawable
+import com.litekite.ime.data.WordDatabase
+import com.litekite.ime.data.WordRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 
 /**
  * @author Vignesh S
@@ -56,7 +62,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
     }
 
     var currentLanguage = 1
-    val languageText = arrayOf("Amis", "Atayal", "Pinayuanan", "Bunun", "Pinuyumayan", "Drekay", "Cou", "SaiSiyat", "Tao", "Thau", "Kevalan", "Truku", "Sakizaya", "Seediq", "Hlaʼalua", "Kanakanavu")
+    val languageText = listOf("Amis", "Atayal", "Pinayuanan", "Bunun", "Pinuyumayan", "Drekay", "Cou", "SaiSiyat", "Tao", "Thau", "Kevalan", "Truku", "Sakizaya", "Seediq", "Hlaʼalua", "Kanakanavu")
 
     @Inject
     lateinit var configController: ConfigController
@@ -73,6 +79,10 @@ class ImeService : InputMethodService(), ConfigController.Callback {
     private var _binding: LayoutKeyboardViewBinding? = null
     private val binding: LayoutKeyboardViewBinding get() = _binding!!
 
+    private lateinit var repository: WordRepository
+
+    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+
     init {
         ImeApp.printLog(TAG, "init:")
     }
@@ -84,6 +94,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
         parseKeyboardLayoutFromXml()
         // Setting configuration callback
         configController.addCallback(this)
+        switchLanguage(languageText[0])
     }
 
     override fun onThemeChanged() {
@@ -153,6 +164,8 @@ class ImeService : InputMethodService(), ConfigController.Callback {
         binding.vKeyboard.removeCallback(keyboardActionListener)
         _binding = null
         super.onDestroy()
+        scope.cancel()
+        WordDatabase.close()
     }
 
     private val keyboardActionListener = object : KeyboardView.KeyboardActionListener {
@@ -316,7 +329,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
 
         val clickListener = View.OnClickListener { view ->
             when (view.id) {
-                R.id.Amis -> currentLanguage = 1
+                R.id.Amis ->  currentLanguage = 1
                 R.id.Atayal -> currentLanguage = 2
                 R.id.Pinayuanan -> currentLanguage = 3
                 R.id.Bunun -> currentLanguage = 4
@@ -333,6 +346,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
                 R.id.Hlaʼalua -> currentLanguage = 15
                 R.id.Kanakanavu -> currentLanguage = 16
             }
+            switchLanguage(languageText[currentLanguage - 1])
             updateLanguage(popupView)
             popupWindow.dismiss()
             keyboardView.invalidateAllKeys()
@@ -395,5 +409,10 @@ class ImeService : InputMethodService(), ConfigController.Callback {
         val symbolKey = symbolKeyboard.keys.find { it.codes.contains(32) }
         qwertyKey?.label = languageText[currentLanguage - 1]
         symbolKey?.label = languageText[currentLanguage - 1]
+    }
+
+    fun switchLanguage(language: String) {
+        val dao = WordDatabase.getInstance(this, language).wordDao()
+        repository = WordRepository(dao)
     }
 }
