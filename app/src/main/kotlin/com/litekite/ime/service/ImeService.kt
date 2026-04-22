@@ -25,25 +25,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.PopupWindow
+import androidx.core.graphics.drawable.toDrawable
 import com.google.android.material.color.MaterialColors
 import com.litekite.ime.R
 import com.litekite.ime.app.ImeApp
 import com.litekite.ime.audio.AudioController
 import com.litekite.ime.config.ConfigController
+import com.litekite.ime.data.WordDatabase
+import com.litekite.ime.data.WordRepository
 import com.litekite.ime.databinding.LayoutKeyboardViewBinding
 import com.litekite.ime.util.CharUtil.cycleCharacter
 import com.litekite.ime.widget.Keyboard
 import com.litekite.ime.widget.KeyboardView
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Locale
-import javax.inject.Inject
-import androidx.core.graphics.drawable.toDrawable
-import com.litekite.ime.data.WordDatabase
-import com.litekite.ime.data.WordRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import java.util.Locale
+import javax.inject.Inject
 
 /**
  * @author Vignesh S
@@ -61,8 +62,27 @@ class ImeService : InputMethodService(), ConfigController.Callback {
         private const val IME_ACTION_CUSTOM_LABEL = EditorInfo.IME_MASK_ACTION + 1
     }
 
-    var currentLanguage = 1
-    val languageText = listOf("Amis", "Atayal", "Pinayuanan", "Bunun", "Pinuyumayan", "Drekay", "Cou", "SaiSiyat", "Tao", "Thau", "Kevalan", "Truku", "Sakizaya", "Seediq", "Hlaʼalua", "Kanakanavu")
+    private var currentLanguage = 1
+    private val languageText = listOf(
+        "Amis",
+        "Atayal",
+        "Pinayuanan",
+        "Bunun",
+        "Pinuyumayan",
+        "Drekay",
+        "Cou",
+        "SaiSiyat",
+        "Tao",
+        "Thau",
+        "Kevalan",
+        "Truku",
+        "Sakizaya",
+        "Seediq",
+        "Hlaʼalua",
+        "Kanakanavu"
+    )
+
+    private var inputWord = ""
 
     @Inject
     lateinit var configController: ConfigController
@@ -153,6 +173,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
         binding.vKeyboard.addCallback(keyboardActionListener)
         binding.vKeyboard.setShifted(info.initialCapsMode != 0)
         changeLanguageText()
+        updateWord(0)
     }
 
     override fun onEvaluateFullscreenMode(): Boolean = false
@@ -177,6 +198,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
                     // Toggle Capitalization
                     binding.vKeyboard.setShifted(!binding.vKeyboard.isShifted())
                 }
+
                 Keyboard.KEYCODE_MODE_CHANGE -> {
                     if (binding.vKeyboard.keyboard == symbolKeyboard) {
                         binding.vKeyboard.setKeyboard(qwertyKeyboard)
@@ -184,31 +206,53 @@ class ImeService : InputMethodService(), ConfigController.Callback {
                         binding.vKeyboard.setKeyboard(symbolKeyboard)
                     }
                 }
+
                 Keyboard.KEYCODE_DONE -> {
                     val action = editorInfo.imeOptions and EditorInfo.IME_MASK_ACTION
                     currentInputConnection.performEditorAction(action)
                 }
+
                 Keyboard.KEYCODE_DELETE -> {
                     currentInputConnection.deleteSurroundingText(1, 0)
+                    inputWord = inputWord.dropLast(1)
+                    updateCandidates()
                 }
+
                 Keyboard.KEYCODE_MAIN_KEYBOARD -> {
                     binding.vKeyboard.setKeyboard(qwertyKeyboard)
                 }
+
                 Keyboard.KEYCODE_LANGUAGE_KEYBOARD -> {
                     showLanguagePopup()
                 }
+
                 Keyboard.KEYCODE_AUTO_FILL_1 -> {
-                    val text = qwertyKeyboard.keys.find { it.codes.contains(primaryCode) }?.label
-                    currentInputConnection.commitText(text, 1)
+                    val text =
+                        qwertyKeyboard.keys.find { it.codes.contains(primaryCode) }?.label.toString()
+                    currentInputConnection.deleteSurroundingText(inputWord.length, 0)
+                    currentInputConnection.commitText("$text ", 1)
+                    inputWord = ""
+                    // scope.launch { repository.onWordSelected(text) }
                 }
+
                 Keyboard.KEYCODE_AUTO_FILL_2 -> {
-                    val text = qwertyKeyboard.keys.find { it.codes.contains(primaryCode) }?.label
-                    currentInputConnection.commitText(text, 1)
+                    val text =
+                        qwertyKeyboard.keys.find { it.codes.contains(primaryCode) }?.label.toString()
+                    currentInputConnection.deleteSurroundingText(inputWord.length, 0)
+                    currentInputConnection.commitText("$text ", 1)
+                    inputWord = ""
+                    // scope.launch { repository.onWordSelected(text) }
                 }
+
                 Keyboard.KEYCODE_AUTO_FILL_3 -> {
-                    val text = qwertyKeyboard.keys.find { it.codes.contains(primaryCode) }?.label
-                    currentInputConnection.commitText(text, 1)
+                    val text =
+                        qwertyKeyboard.keys.find { it.codes.contains(primaryCode) }?.label.toString()
+                    currentInputConnection.deleteSurroundingText(inputWord.length, 0)
+                    currentInputConnection.commitText("$text ", 1)
+                    inputWord = ""
+                    // scope.launch { repository.onWordSelected(text) }
                 }
+
                 Keyboard.KEYCODE_CYCLE_CHAR -> {
                     val text = currentInputConnection.getTextBeforeCursor(1, 0)
                     if (text.isNullOrEmpty()) {
@@ -222,6 +266,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
                         currentInputConnection.commitText(altChar.toString(), 1)
                     }
                 }
+
                 Keyboard.KEYCODE_ENTER -> {
                     val imeOptionsActionId = getImeOptionsActionId(editorInfo)
                     when {
@@ -230,6 +275,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
                             // performEditorAction with actionId regardless of its value.
                             currentInputConnection.performEditorAction(editorInfo.actionId)
                         }
+
                         EditorInfo.IME_ACTION_NONE != imeOptionsActionId -> {
                             // We didn't have an actionLabel, but we had another action to execute.
                             // EditorInfo.IME_ACTION_NONE explicitly means no action.
@@ -241,6 +287,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
                             // should be sent to performEditorAction.
                             currentInputConnection.performEditorAction(imeOptionsActionId)
                         }
+
                         else -> {
                             // No action label, and the action from imeOptions is NONE:
                             // this is a regular enter key that should input a carriage return.
@@ -248,8 +295,14 @@ class ImeService : InputMethodService(), ConfigController.Callback {
                         }
                     }
                 }
+
                 else -> {
                     commitText(primaryCode)
+                    if (primaryCode == 32) {
+                        inputWord = ""
+                    } else {
+                        updateWord(primaryCode)
+                    }
                 }
             }
             audioController.playSoundEffect()
@@ -265,9 +318,11 @@ class ImeService : InputMethodService(), ConfigController.Callback {
             info.imeOptions and EditorInfo.IME_FLAG_NO_ENTER_ACTION != 0 -> {
                 EditorInfo.IME_ACTION_NONE
             }
+
             info.actionLabel != null -> {
                 IME_ACTION_CUSTOM_LABEL
             }
+
             else -> {
                 // Note: this is different from editorInfo.actionId, hence "ImeOptionsActionId"
                 info.imeOptions and EditorInfo.IME_MASK_ACTION
@@ -329,7 +384,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
 
         val clickListener = View.OnClickListener { view ->
             when (view.id) {
-                R.id.Amis ->  currentLanguage = 1
+                R.id.Amis -> currentLanguage = 1
                 R.id.Atayal -> currentLanguage = 2
                 R.id.Pinayuanan -> currentLanguage = 3
                 R.id.Bunun -> currentLanguage = 4
@@ -376,7 +431,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
         }
     }
 
-    fun updateLanguage(view: View) {
+    private fun updateLanguage(view: View) {
         val map = mapOf(
             1 to R.id.Amis,
             2 to R.id.Atayal,
@@ -404,15 +459,47 @@ class ImeService : InputMethodService(), ConfigController.Callback {
         changeLanguageText()
     }
 
-    fun changeLanguageText() {
+    private fun changeLanguageText() {
         val qwertyKey = qwertyKeyboard.keys.find { it.codes.contains(32) }
         val symbolKey = symbolKeyboard.keys.find { it.codes.contains(32) }
         qwertyKey?.label = languageText[currentLanguage - 1]
         symbolKey?.label = languageText[currentLanguage - 1]
     }
 
-    fun switchLanguage(language: String) {
+    private fun switchLanguage(language: String) {
         val dao = WordDatabase.getInstance(this, language).wordDao()
         repository = WordRepository(dao)
     }
+
+    private fun updateWord(code: Int) {
+        val commitText = Char(code).toString()
+        inputWord += commitText
+        updateCandidates()
+    }
+
+    private fun updateCandidates() {
+        val keyboardView = binding.vKeyboard
+        val q1 = qwertyKeyboard.keys.find { it.codes.contains(-11) }
+        val q2 = qwertyKeyboard.keys.find { it.codes.contains(-12) }
+        val q3 = qwertyKeyboard.keys.find { it.codes.contains(-13) }
+        val s1 = symbolKeyboard.keys.find { it.codes.contains(-11) }
+        val s2 = symbolKeyboard.keys.find { it.codes.contains(-12) }
+        val s3 = symbolKeyboard.keys.find { it.codes.contains(-13) }
+        /*
+        scope.launch {
+            val candidates = repository.getCandidates(inputWord)
+            q1?.label = candidates[0]
+            q2?.label = candidates[1]
+            q3?.label = candidates[2]
+        }
+         */
+        q1?.label = inputWord
+        q2?.label = inputWord
+        q3?.label = inputWord
+        s1?.label = q1?.label.toString()
+        s2?.label = q2?.label.toString()
+        s3?.label = q3?.label.toString()
+        keyboardView.invalidateAllKeys()
+    }
+
 }

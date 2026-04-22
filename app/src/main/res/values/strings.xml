@@ -33,11 +33,13 @@
     <!-- Alternative keys for i. [DO NOT TRANSLATE] -->
     <string name="alternates_for_i">i|ɨ|</string>
     <!-- Alternative keys for l. [DO NOT TRANSLATE] -->
-    <string name="alternates_for_l">l|lj|lh|</string>
+    <string name="alternates_for_l">l|lh|lj|</string>
     <!-- Alternative keys for n. [DO NOT TRANSLATE] -->
     <string name="alternates_for_n">n|ng|</string>
     <!-- Alternative keys for o. [DO NOT TRANSLATE] -->
     <string name="alternates_for_o">o|oe|</string>
+    <!-- Alternative keys for r. [DO NOT TRANSLATE] -->
+    <string name="alternates_for_r">r|ṟ|</string>
     <!-- Alternative keys for s. [DO NOT TRANSLATE] -->
     <string name="alternates_for_s">s|sh|</string>
     <!-- Alternative keys for t. [DO NOT TRANSLATE] -->
@@ -45,7 +47,7 @@
     <!-- Alternative keys for u. [DO NOT TRANSLATE] -->
     <string name="alternates_for_u">u|ʉ|</string>
     <!-- Alternative keys for symbol. [DO NOT TRANSLATE] -->
-    <string name="alternates_for_symbol">\'|^|-|:|</string>
+    <string name="alternates_for_symbol">ʼ|^|:|</string>
 
 
     <string name="Amis">阿美語 (Amis)</string>

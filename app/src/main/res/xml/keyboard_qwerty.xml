@@ -50,7 +50,8 @@
             app:popupCharacters="@string/alternates_for_e" />
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
-            app:keyLabel="r" />
+            app:keyLabel="r"
+            app:popupCharacters="@string/alternates_for_r"/>
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="t"
@@ -112,7 +113,7 @@
 
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
-            app:keyLabel="'"
+            app:keyLabel="ʼ"
             app:popupCharacters="@string/alternates_for_symbol"
             app:keyEdgeFlags="right" />
     </Row>

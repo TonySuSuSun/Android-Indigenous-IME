@@ -456,9 +456,11 @@ class KeyboardView @JvmOverloads constructor(
                 MotionEvent.ACTION_HOVER_ENTER -> {
                     event.action = MotionEvent.ACTION_DOWN
                 }
+
                 MotionEvent.ACTION_HOVER_MOVE -> {
                     event.action = MotionEvent.ACTION_MOVE
                 }
+
                 MotionEvent.ACTION_HOVER_EXIT -> {
                     event.action = MotionEvent.ACTION_UP
                 }
@@ -554,6 +556,7 @@ class KeyboardView @JvmOverloads constructor(
                     postDelayed(performRepeatKey, REPEAT_KEY_START_DELAY)
                 }
             }
+
             MotionEvent.ACTION_MOVE -> {
                 removeCallbacks()
                 if (currentKeyIndex == Keyboard.NOT_A_KEY) {
@@ -574,6 +577,7 @@ class KeyboardView @JvmOverloads constructor(
                     }
                 }
             }
+
             MotionEvent.ACTION_UP,
             MotionEvent.ACTION_CANCEL -> {
                 abortKey = true

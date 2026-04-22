@@ -83,7 +83,8 @@ class KeyPopupCharsWindow @JvmOverloads constructor(
                 val keyBinding = WidgetKeyPopupCharBinding.inflate(LayoutInflater.from(context))
                 keyBinding.tvKeyPopupChar.text = keyLabel
                 keyLabel = ""
-                keyBinding.tvKeyPopupChar.textSize = (context.resources.getDimensionPixelSize(R.dimen.keyboard_view_key_text_size) * 0.5).toFloat()
+                keyBinding.tvKeyPopupChar.textSize =
+                    (context.resources.getDimensionPixelSize(R.dimen.keyboard_view_key_text_size) * 0.5).toFloat()
                 // Adding popup character
                 (contentView as ViewGroup).addView(keyBinding.root)
                 // Width & height of the popup window
@@ -97,7 +98,7 @@ class KeyPopupCharsWindow @JvmOverloads constructor(
                 // Listening for click events
                 keyBinding.tvKeyPopupChar.setOnClickListener {
                     dismiss()
-                    for(index in keyBinding.tvKeyPopupChar.text.indices) {
+                    for (index in keyBinding.tvKeyPopupChar.text.indices) {
                         callbacks.forEach { it.onKey(keyBinding.tvKeyPopupChar.text[index].code) }
                     }
                 }

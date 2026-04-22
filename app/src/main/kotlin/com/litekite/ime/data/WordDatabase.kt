@@ -10,8 +10,10 @@ abstract class WordDatabase : RoomDatabase() {
     abstract fun wordDao(): WordDao
 
     companion object {
-        @Volatile private var INSTANCE: WordDatabase? = null
-        @Volatile private var currentLanguage: String? = null
+        @Volatile
+        private var INSTANCE: WordDatabase? = null
+        @Volatile
+        private var currentLanguage: String? = null
 
         fun getInstance(context: Context, language: String): WordDatabase {
             // 如果切換了語言，關閉舊的連線

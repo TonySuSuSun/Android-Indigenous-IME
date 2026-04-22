@@ -189,6 +189,7 @@ class Keyboard(context: Context, layoutRes: Int) {
                     TAG_KEYBOARD -> {
                         parseKeyboardAttributes(context.resources, parser)
                     }
+
                     TAG_ROW -> {
                         x = 0
                         inRow = true
@@ -200,6 +201,7 @@ class Keyboard(context: Context, layoutRes: Int) {
                             inRow = false
                         }
                     }
+
                     TAG_KEY -> {
                         inKey = true
                         if (currentRow != null) {
@@ -574,11 +576,11 @@ class Keyboard(context: Context, layoutRes: Int) {
             val topEdge = edgeFlags and EDGE_TOP > 0
             val bottomEdge = edgeFlags and EDGE_BOTTOM > 0
             return (
-                (x >= this.x || leftEdge && x <= this.x + width) &&
-                    (x < this.x + width || rightEdge && x >= this.x) &&
-                    (y >= this.y || topEdge && y <= this.y + height) &&
-                    (y < this.y + height || bottomEdge && y >= this.y)
-                )
+                    (x >= this.x || leftEdge && x <= this.x + width) &&
+                            (x < this.x + width || rightEdge && x >= this.x) &&
+                            (y >= this.y || topEdge && y <= this.y + height) &&
+                            (y < this.y + height || bottomEdge && y >= this.y)
+                    )
         }
 
         fun adjustLabelCase(): String {

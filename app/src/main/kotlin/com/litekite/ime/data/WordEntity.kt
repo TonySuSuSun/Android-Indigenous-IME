@@ -12,9 +12,6 @@ data class WordEntity(
     @ColumnInfo(name = "word")
     val word: String,
 
-    @ColumnInfo(name = "prefix")
-    val prefix: String,
-
     @ColumnInfo(name = "root")
     val root: String = "",
 
