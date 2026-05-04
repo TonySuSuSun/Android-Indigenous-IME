@@ -168,13 +168,26 @@ class ImeService : InputMethodService(), ConfigController.Callback {
     }
 
     override fun onCreateInputView(): View {
-        ImeApp.printLog(TAG, "onCreateInputView:")
         _binding = LayoutKeyboardViewBinding.inflate(LayoutInflater.from(this))
+
+        // 從 binding 取得候選詞 TextView
+        candidate1 = binding.root.findViewById(R.id.candidate1)
+        candidate2 = binding.root.findViewById(R.id.candidate2)
+        candidate3 = binding.root.findViewById(R.id.candidate3)
+
+        listOf(candidate1, candidate2, candidate3).forEach { tv ->
+            tv?.setOnClickListener {
+                val word = tv.text.toString()
+                if (word.isNotEmpty()) onCandidateSelected(word)
+            }
+        }
+
         return binding.root
     }
 
     override fun onStartInputView(info: EditorInfo, restarting: Boolean) {
         super.onStartInputView(info, restarting)
+        setCandidatesViewShown(true)
         ImeApp.printLog(TAG, "onStartInputView:")
         _editorInfo = info
         binding.vKeyboard.setKeyboard(qwertyKeyboard)
@@ -194,22 +207,6 @@ class ImeService : InputMethodService(), ConfigController.Callback {
         super.onDestroy()
         scope.cancel()
         WordDatabase.close()
-    }
-
-    @SuppressLint("InflateParams")
-    override fun onCreateCandidatesView(): View {
-        val bar = layoutInflater.inflate(R.layout.candidate_bar, null)
-        candidate1 = bar.findViewById(R.id.candidate1)
-        candidate2 = bar.findViewById(R.id.candidate2)
-        candidate3 = bar.findViewById(R.id.candidate3)
-        listOf(candidate1, candidate2, candidate3).forEach { tv ->
-            tv?.setOnClickListener {
-                val word = tv.text.toString()
-                if (word.isNotEmpty()) onCandidateSelected(word)
-            }
-        }
-        setCandidatesViewShown(true)
-        return bar
     }
 
     private val keyboardActionListener = object : KeyboardView.KeyboardActionListener {
@@ -464,20 +461,29 @@ class ImeService : InputMethodService(), ConfigController.Callback {
     }
 
     private fun switchLanguage(language: String) {
-        val dao = WordDatabase.getInstance(this, language).wordDao()
-        repository = WordRepository(dao)
+        android.util.Log.d("IME_DB", "switchLanguage: '$language'")
+        try {
+            val dao = WordDatabase.getInstance(this, language).wordDao()
+            repository = WordRepository(dao)
+            android.util.Log.d("IME_DB", "switchLanguage success")
+        } catch (e: Exception) {
+            android.util.Log.e("IME_DB", "switchLanguage error: ${e.message}")
+        }
     }
 
     private var searchJob: Job? = null
 
     fun onInputChanged(input: String) {
+        android.util.Log.d("IME_DB", "onInputChanged: '$input'")
         searchJob?.cancel()
         currentInput = input
         if (input.isEmpty()) {
             clearCandidates(); return
         }
         searchJob = scope.launch {
+            android.util.Log.d("IME_DB", "launching search for: '$input'")
             val candidates = repository.getCandidates(input)
+            android.util.Log.d("IME_DB", "candidates: $candidates")
             withContext(Dispatchers.Main) {
                 updateCandidates(candidates)
             }
@@ -485,7 +491,6 @@ class ImeService : InputMethodService(), ConfigController.Callback {
     }
 
     private fun updateCandidates(candidates: List<String>) {
-        val bar = candidate1?.rootView ?: return
         candidate1?.text = candidates.getOrElse(0) { "" }
         candidate2?.text = candidates.getOrElse(1) { "" }
         candidate3?.text = candidates.getOrElse(2) { "" }
@@ -498,10 +503,13 @@ class ImeService : InputMethodService(), ConfigController.Callback {
     }
 
     private fun onCandidateSelected(word: String) {
-        currentInputConnection?.commitText(word, 1)
+        // 先刪除目前已輸入的字串
+        currentInputConnection?.deleteSurroundingText(currentInput.length, 0)
+        // 再輸出候選詞
+        currentInputConnection?.commitText("$word ", 1)
         scope.launch { repository.onWordSelected(word) }
+        inputWord = ""
         currentInput = ""
         clearCandidates()
     }
-
 }

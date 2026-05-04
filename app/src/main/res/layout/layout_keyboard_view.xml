@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
    Copyright 2021 LiteKite Startup. All rights reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,12 +13,55 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal|bottom"
-    android:paddingTop="@dimen/keyboard_view_root_padding_top">
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal|bottom">
+
+    <LinearLayout
+        android:id="@+id/candidateBar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:background="#F5F5F5"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/candidate1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:background="?attr/selectableItemBackground"
+            android:padding="8dp" />
+
+        <TextView
+            android:id="@+id/candidate2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:background="?attr/selectableItemBackground"
+            android:padding="8dp" />
+
+        <TextView
+            android:id="@+id/candidate3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:background="?attr/selectableItemBackground"
+            android:padding="8dp" />
+
+    </LinearLayout>
 
     <com.litekite.ime.widget.KeyboardView
         android:id="@+id/v_keyboard"
@@ -29,6 +71,7 @@
         android:layout_gravity="center_horizontal"
         android:focusable="true"
         android:padding="@dimen/keyboard_view_padding"
+        android:paddingTop="@dimen/keyboard_view_root_padding_top"
         tools:ignore="SpeakableTextPresentCheck" />
 
-</FrameLayout>
+</LinearLayout>
