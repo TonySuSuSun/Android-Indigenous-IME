@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
    Copyright 2021 LiteKite Startup. All rights reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,22 +22,6 @@
 
     <Row>
         <Key
-            app:codes="@integer/keycode_auto_fill_1"
-            app:keyEdgeFlags="left"
-            app:keyWidth="@dimen/keyboard_big_key_size" />
-        <Key
-            app:codes="@integer/keycode_auto_fill_2"
-            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
-            app:keyWidth="@dimen/keyboard_big_key_size" />
-        <Key
-            app:codes="@integer/keycode_auto_fill_3"
-            app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
-            app:keyWidth="@dimen/keyboard_big_key_size"
-            app:keyEdgeFlags="right" />
-    </Row>
-
-    <Row>
-        <Key
             app:keyEdgeFlags="left"
             app:keyLabel="q" />
         <Key
@@ -51,11 +34,11 @@
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="r"
-            app:popupCharacters="@string/alternates_for_r"/>
+            app:popupCharacters="@string/alternates_for_r" />
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="t"
-            app:popupCharacters="@string/alternates_for_t"/>
+            app:popupCharacters="@string/alternates_for_t" />
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="y" />
@@ -89,7 +72,7 @@
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="d"
-            app:popupCharacters="@string/alternates_for_d"/>
+            app:popupCharacters="@string/alternates_for_d" />
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="f" />
@@ -99,7 +82,7 @@
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="h"
-            app:popupCharacters="@string/alternates_for_h"/>
+            app:popupCharacters="@string/alternates_for_h" />
         <Key
             app:keyHorizontalGap="@dimen/keyboard_key_horizontal_gap"
             app:keyLabel="j" />

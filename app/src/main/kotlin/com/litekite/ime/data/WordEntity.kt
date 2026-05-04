@@ -12,12 +12,12 @@ data class WordEntity(
     @ColumnInfo(name = "word")
     val word: String,
 
-    @ColumnInfo(name = "root")
+    @ColumnInfo(name = "root", defaultValue = "")
     val root: String = "",
 
-    @ColumnInfo(name = "frequency")
+    @ColumnInfo(name = "frequency", defaultValue = "0")
     val frequency: Int = 0,
 
-    @ColumnInfo(name = "source")
+    @ColumnInfo(name = "source", defaultValue = "system")
     val source: String = "system"
 )

@@ -4,14 +4,17 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 
 @Database(entities = [WordEntity::class], version = 1, exportSchema = false)
+@TypeConverters()
 abstract class WordDatabase : RoomDatabase() {
     abstract fun wordDao(): WordDao
 
     companion object {
         @Volatile
         private var INSTANCE: WordDatabase? = null
+
         @Volatile
         private var currentLanguage: String? = null
 

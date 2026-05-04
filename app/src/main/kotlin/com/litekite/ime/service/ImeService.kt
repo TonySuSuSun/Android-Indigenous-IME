@@ -25,6 +25,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.PopupWindow
+import android.widget.TextView
 import androidx.core.graphics.drawable.toDrawable
 import com.google.android.material.color.MaterialColors
 import com.litekite.ime.R
@@ -40,9 +41,11 @@ import com.litekite.ime.widget.KeyboardView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.Locale
 import javax.inject.Inject
 
@@ -100,8 +103,13 @@ class ImeService : InputMethodService(), ConfigController.Callback {
     private val binding: LayoutKeyboardViewBinding get() = _binding!!
 
     private lateinit var repository: WordRepository
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
 
-    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+    private var candidate1: TextView? = null
+    private var candidate2: TextView? = null
+    private var candidate3: TextView? = null
+
+    private var currentInput: String = ""
 
     init {
         ImeApp.printLog(TAG, "init:")
@@ -173,7 +181,6 @@ class ImeService : InputMethodService(), ConfigController.Callback {
         binding.vKeyboard.addCallback(keyboardActionListener)
         binding.vKeyboard.setShifted(info.initialCapsMode != 0)
         changeLanguageText()
-        updateWord(0)
     }
 
     override fun onEvaluateFullscreenMode(): Boolean = false
@@ -187,6 +194,22 @@ class ImeService : InputMethodService(), ConfigController.Callback {
         super.onDestroy()
         scope.cancel()
         WordDatabase.close()
+    }
+
+    @SuppressLint("InflateParams")
+    override fun onCreateCandidatesView(): View {
+        val bar = layoutInflater.inflate(R.layout.candidate_bar, null)
+        candidate1 = bar.findViewById(R.id.candidate1)
+        candidate2 = bar.findViewById(R.id.candidate2)
+        candidate3 = bar.findViewById(R.id.candidate3)
+        listOf(candidate1, candidate2, candidate3).forEach { tv ->
+            tv?.setOnClickListener {
+                val word = tv.text.toString()
+                if (word.isNotEmpty()) onCandidateSelected(word)
+            }
+        }
+        setCandidatesViewShown(true)
+        return bar
     }
 
     private val keyboardActionListener = object : KeyboardView.KeyboardActionListener {
@@ -215,7 +238,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
                 Keyboard.KEYCODE_DELETE -> {
                     currentInputConnection.deleteSurroundingText(1, 0)
                     inputWord = inputWord.dropLast(1)
-                    updateCandidates()
+                    onInputChanged(inputWord)
                 }
 
                 Keyboard.KEYCODE_MAIN_KEYBOARD -> {
@@ -224,33 +247,6 @@ class ImeService : InputMethodService(), ConfigController.Callback {
 
                 Keyboard.KEYCODE_LANGUAGE_KEYBOARD -> {
                     showLanguagePopup()
-                }
-
-                Keyboard.KEYCODE_AUTO_FILL_1 -> {
-                    val text =
-                        qwertyKeyboard.keys.find { it.codes.contains(primaryCode) }?.label.toString()
-                    currentInputConnection.deleteSurroundingText(inputWord.length, 0)
-                    currentInputConnection.commitText("$text ", 1)
-                    inputWord = ""
-                    // scope.launch { repository.onWordSelected(text) }
-                }
-
-                Keyboard.KEYCODE_AUTO_FILL_2 -> {
-                    val text =
-                        qwertyKeyboard.keys.find { it.codes.contains(primaryCode) }?.label.toString()
-                    currentInputConnection.deleteSurroundingText(inputWord.length, 0)
-                    currentInputConnection.commitText("$text ", 1)
-                    inputWord = ""
-                    // scope.launch { repository.onWordSelected(text) }
-                }
-
-                Keyboard.KEYCODE_AUTO_FILL_3 -> {
-                    val text =
-                        qwertyKeyboard.keys.find { it.codes.contains(primaryCode) }?.label.toString()
-                    currentInputConnection.deleteSurroundingText(inputWord.length, 0)
-                    currentInputConnection.commitText("$text ", 1)
-                    inputWord = ""
-                    // scope.launch { repository.onWordSelected(text) }
                 }
 
                 Keyboard.KEYCODE_CYCLE_CHAR -> {
@@ -301,7 +297,8 @@ class ImeService : InputMethodService(), ConfigController.Callback {
                     if (primaryCode == 32) {
                         inputWord = ""
                     } else {
-                        updateWord(primaryCode)
+                        inputWord += primaryCode.toChar()
+                        onInputChanged(inputWord)
                     }
                 }
             }
@@ -471,35 +468,40 @@ class ImeService : InputMethodService(), ConfigController.Callback {
         repository = WordRepository(dao)
     }
 
-    private fun updateWord(code: Int) {
-        val commitText = Char(code).toString()
-        inputWord += commitText
-        updateCandidates()
+    private var searchJob: Job? = null
+
+    fun onInputChanged(input: String) {
+        searchJob?.cancel()
+        currentInput = input
+        if (input.isEmpty()) {
+            clearCandidates(); return
+        }
+        searchJob = scope.launch {
+            val candidates = repository.getCandidates(input)
+            withContext(Dispatchers.Main) {
+                updateCandidates(candidates)
+            }
+        }
     }
 
-    private fun updateCandidates() {
-        val keyboardView = binding.vKeyboard
-        val q1 = qwertyKeyboard.keys.find { it.codes.contains(-11) }
-        val q2 = qwertyKeyboard.keys.find { it.codes.contains(-12) }
-        val q3 = qwertyKeyboard.keys.find { it.codes.contains(-13) }
-        val s1 = symbolKeyboard.keys.find { it.codes.contains(-11) }
-        val s2 = symbolKeyboard.keys.find { it.codes.contains(-12) }
-        val s3 = symbolKeyboard.keys.find { it.codes.contains(-13) }
-        /*
-        scope.launch {
-            val candidates = repository.getCandidates(inputWord)
-            q1?.label = candidates[0]
-            q2?.label = candidates[1]
-            q3?.label = candidates[2]
-        }
-         */
-        q1?.label = inputWord
-        q2?.label = inputWord
-        q3?.label = inputWord
-        s1?.label = q1?.label.toString()
-        s2?.label = q2?.label.toString()
-        s3?.label = q3?.label.toString()
-        keyboardView.invalidateAllKeys()
+    private fun updateCandidates(candidates: List<String>) {
+        val bar = candidate1?.rootView ?: return
+        candidate1?.text = candidates.getOrElse(0) { "" }
+        candidate2?.text = candidates.getOrElse(1) { "" }
+        candidate3?.text = candidates.getOrElse(2) { "" }
+    }
+
+    private fun clearCandidates() {
+        candidate1?.text = ""
+        candidate2?.text = ""
+        candidate3?.text = ""
+    }
+
+    private fun onCandidateSelected(word: String) {
+        currentInputConnection?.commitText(word, 1)
+        scope.launch { repository.onWordSelected(word) }
+        currentInput = ""
+        clearCandidates()
     }
 
 }

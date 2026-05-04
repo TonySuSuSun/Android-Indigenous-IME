@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/candidateBar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/keyboard_key_size"
+    android:orientation="horizontal"
+    android:background="#F5F5F5"
+    android:divider="?android:dividerHorizontal"
+    android:showDividers="middle">
+
+    <TextView
+        android:id="@+id/candidate1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textSize="@dimen/keyboard_view_key_text_size"
+        android:textColor="#000000"
+        android:background="?attr/selectableItemBackground"
+        android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/candidate2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textSize="@dimen/keyboard_view_key_text_size"
+        android:textColor="#000000"
+        android:background="?attr/selectableItemBackground"
+        android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/candidate3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textSize="@dimen/keyboard_view_key_text_size"
+        android:textColor="#000000"
+        android:background="?attr/selectableItemBackground"
+        android:padding="8dp" />
+
+</LinearLayout>
