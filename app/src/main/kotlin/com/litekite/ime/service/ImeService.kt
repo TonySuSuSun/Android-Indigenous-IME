@@ -372,7 +372,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
                 keyboardView,
                 Gravity.NO_GRAVITY,
                 x,
-                y - 3440
+                y - 3410
             )
         }
 
