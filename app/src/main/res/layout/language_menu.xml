@@ -2,16 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:padding="@dimen/keyboard_view_padding"
-    android:background="@color/white"
+    android:background="?android:attr/colorBackground"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/Amis"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/keyboard_view_padding"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorSecondary"
         android:textSize="@dimen/keyboard_view_key_text_size"
         android:text="@string/Amis" />
 
@@ -20,134 +20,134 @@
         android:layout_height="match_parent"
         android:padding="@dimen/keyboard_view_padding"
         android:textSize="@dimen/keyboard_view_key_text_size"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorSecondary"
         android:id="@+id/Atayal"
-        android:text="@string/Atayal"/>
+        android:text="@string/Atayal" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/keyboard_view_padding"
         android:textSize="@dimen/keyboard_view_key_text_size"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorSecondary"
         android:id="@+id/Pinayuanan"
-        android:text="@string/Pinayuanan"/>
+        android:text="@string/Pinayuanan" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/keyboard_view_padding"
         android:textSize="@dimen/keyboard_view_key_text_size"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorSecondary"
         android:id="@+id/Bunun"
-        android:text="@string/Bunun"/>
+        android:text="@string/Bunun" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/keyboard_view_padding"
         android:textSize="@dimen/keyboard_view_key_text_size"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorSecondary"
         android:id="@+id/Pinuyumayan"
-        android:text="@string/Pinuyumayan"/>
+        android:text="@string/Pinuyumayan" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/keyboard_view_padding"
         android:textSize="@dimen/keyboard_view_key_text_size"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorSecondary"
         android:id="@+id/Drekay"
-        android:text="@string/Drekay"/>
+        android:text="@string/Drekay" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/keyboard_view_padding"
         android:textSize="@dimen/keyboard_view_key_text_size"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorSecondary"
         android:id="@+id/Cou"
-        android:text="@string/Cou"/>
+        android:text="@string/Cou" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/keyboard_view_padding"
         android:textSize="@dimen/keyboard_view_key_text_size"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorSecondary"
         android:id="@+id/SaiSiyat"
-        android:text="@string/SaiSiyat"/>
+        android:text="@string/SaiSiyat" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/keyboard_view_padding"
         android:textSize="@dimen/keyboard_view_key_text_size"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorSecondary"
         android:id="@+id/Tao"
-        android:text="@string/Tao"/>
+        android:text="@string/Tao" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/keyboard_view_padding"
         android:textSize="@dimen/keyboard_view_key_text_size"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorSecondary"
         android:id="@+id/Thau"
-        android:text="@string/Thau"/>
+        android:text="@string/Thau" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/keyboard_view_padding"
         android:textSize="@dimen/keyboard_view_key_text_size"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorSecondary"
         android:id="@+id/Kevalan"
-        android:text="@string/Kevalan"/>
+        android:text="@string/Kevalan" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/keyboard_view_padding"
         android:textSize="@dimen/keyboard_view_key_text_size"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorSecondary"
         android:id="@+id/Truku"
-        android:text="@string/Truku"/>
+        android:text="@string/Truku" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/keyboard_view_padding"
         android:textSize="@dimen/keyboard_view_key_text_size"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorSecondary"
         android:id="@+id/Sakizaya"
-        android:text="@string/Sakizaya"/>
+        android:text="@string/Sakizaya" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/keyboard_view_padding"
         android:textSize="@dimen/keyboard_view_key_text_size"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorSecondary"
         android:id="@+id/Seediq"
-        android:text="@string/Seediq"/>
+        android:text="@string/Seediq" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/keyboard_view_padding"
         android:textSize="@dimen/keyboard_view_key_text_size"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorSecondary"
         android:id="@+id/Hlaʼalua"
-        android:text="@string/Hlaʼalua"/>
+        android:text="@string/Hlaʼalua" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/keyboard_view_padding"
         android:textSize="@dimen/keyboard_view_key_text_size"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorSecondary"
         android:id="@+id/Kanakanavu"
-        android:text="@string/Kanakanavu"/>
+        android:text="@string/Kanakanavu" />
 
 </LinearLayout>

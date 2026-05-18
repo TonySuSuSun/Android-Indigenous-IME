@@ -356,20 +356,7 @@ class KeyboardView @JvmOverloads constructor(
             // Switch the character to uppercase if shift is pressed
             val keyLabel = key.adjustLabelCase()
             if (keyLabel.isNotEmpty()) {
-                // Use primary color for letters and digits, secondary color for everything else
-                paint.color = when {
-                    Character.isLetterOrDigit(keyLabel[0]) -> {
-                        keyTextColorPrimary
-                    }
-
-                    useKeyTextColorSecondary -> {
-                        keyTextColorSecondary
-                    }
-
-                    else -> {
-                        keyTextColorPrimary
-                    }
-                }
+                paint.color = keyTextColorPrimary
                 // For punctuation, use large font. For labels, use small font.
                 if (keyLabel.isPunctuation()) {
                     paint.textSize = keyPunctuationTextSize.toFloat()

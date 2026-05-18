@@ -372,7 +372,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
                 keyboardView,
                 Gravity.NO_GRAVITY,
                 x,
-                y - 3410
+                y - (33.9 * resources.getDimension(R.dimen.keyboard_key_size)).toInt()
             )
         }
 
@@ -448,7 +448,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
             view.findViewById<View>(id).setBackgroundColor(Color.TRANSPARENT)
         }
         map[currentLanguage]?.let { id ->
-            view.findViewById<View>(id).setBackgroundColor(Color.GREEN)
+            view.findViewById<View>(id).setBackgroundColor(resources.getColor(R.color.green_400))
         }
         changeLanguageText()
     }

@@ -23,9 +23,9 @@
     <LinearLayout
         android:id="@+id/candidateBar"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="@dimen/keyboard_key_size"
         android:orientation="horizontal"
-        android:background="#F5F5F5"
+        android:background="?android:attr/colorBackground"
         android:visibility="visible">
 
         <TextView
@@ -34,10 +34,10 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="16sp"
-            android:textColor="#000000"
+            android:textSize="@dimen/keyboard_view_key_text_size"
+            android:textColor="?android:attr/textColorSecondary"
             android:background="?attr/selectableItemBackground"
-            android:padding="8dp" />
+            android:padding="@dimen/keyboard_view_padding" />
 
         <TextView
             android:id="@+id/candidate2"
@@ -45,10 +45,10 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="16sp"
-            android:textColor="#000000"
+            android:textSize="@dimen/keyboard_view_key_text_size"
+            android:textColor="?android:attr/textColorSecondary"
             android:background="?attr/selectableItemBackground"
-            android:padding="8dp" />
+            android:padding="@dimen/keyboard_view_padding" />
 
         <TextView
             android:id="@+id/candidate3"
@@ -56,10 +56,10 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="16sp"
-            android:textColor="#000000"
+            android:textSize="@dimen/keyboard_view_key_text_size"
+            android:textColor="?android:attr/textColorSecondary"
             android:background="?attr/selectableItemBackground"
-            android:padding="8dp" />
+            android:padding="@dimen/keyboard_view_padding" />
 
     </LinearLayout>
 

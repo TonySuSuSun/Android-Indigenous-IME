@@ -32,8 +32,7 @@
     <style name="KeyPopupTextViewStyle" parent="Widget.MaterialComponents.TextView">
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textColor">?android:textColorPrimary</item>
-        <item name="android:textColorSecondary">?android:textColorSecondary</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:textSize">@dimen/keyboard_view_key_text_size</item>
         <item name="android:background">@null</item>
     </style>

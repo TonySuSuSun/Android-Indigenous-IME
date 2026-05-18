@@ -33,6 +33,7 @@ import com.litekite.ime.base.CallbackProvider
 import com.litekite.ime.databinding.WidgetKeyPopupCharBinding
 import androidx.core.graphics.drawable.toDrawable
 
+
 /**
  * A Keyboard key characters popup shown above the key that supports multiple character types
  * for a single character or label.
@@ -61,7 +62,7 @@ class KeyPopupCharsWindow @JvmOverloads constructor(
             R.drawable.bg_keyboard_key
         )
         contentView.background.setTint(
-            MaterialColors.getColor(contentView, androidx.appcompat.R.attr.colorControlHighlight)
+            MaterialColors.getColor(contentView, android.R.attr.colorControlHighlight)
         )
         elevation = 10.0F
         animationStyle = android.R.style.Animation_Dialog

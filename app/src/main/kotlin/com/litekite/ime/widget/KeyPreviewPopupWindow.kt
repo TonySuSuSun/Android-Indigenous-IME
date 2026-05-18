@@ -51,7 +51,7 @@ class KeyPreviewPopupWindow @JvmOverloads constructor(
     init {
         contentView = binding.root
         contentView.background.setTint(
-            MaterialColors.getColor(contentView, androidx.appcompat.R.attr.colorControlHighlight)
+            MaterialColors.getColor(contentView, android.R.attr.colorControlHighlight)
         )
         elevation = 10.0F
         isTouchable = false
