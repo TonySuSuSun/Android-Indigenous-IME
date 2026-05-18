@@ -360,19 +360,21 @@ class ImeService : InputMethodService(), ConfigController.Callback {
         val key = keyboardView.keyboard?.keys?.find { it.codes.contains(-99) }
 
         key?.let {
-            val x = location[0] + it.x
-            val y = location[1] + it.y
-
             popupView.measure(
                 View.MeasureSpec.UNSPECIFIED,
                 View.MeasureSpec.UNSPECIFIED
             )
 
+            val popupHeight = popupView.measuredHeight
+
+            val x = location[0] + it.x
+            val y = location[1] + it.y - (popupHeight * 2.66).toInt()
+
             popupWindow.showAtLocation(
                 keyboardView,
                 Gravity.NO_GRAVITY,
                 x,
-                y - (33.9 * resources.getDimension(R.dimen.keyboard_key_size)).toInt()
+                y
             )
         }
 
