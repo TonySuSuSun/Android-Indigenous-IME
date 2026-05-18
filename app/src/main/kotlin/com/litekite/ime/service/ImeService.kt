@@ -355,7 +355,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
 
         val keyboardView = binding.vKeyboard
         val location = IntArray(2)
-        keyboardView.getLocationOnScreen(location)
+        keyboardView.getLocationInWindow(location)
 
         val key = keyboardView.keyboard?.keys?.find { it.codes.contains(-99) }
 
@@ -368,10 +368,10 @@ class ImeService : InputMethodService(), ConfigController.Callback {
             val popupHeight = popupView.measuredHeight
 
             val x = location[0] + it.x
-            val y = location[1] + it.y - (popupHeight * 2.66).toInt()
+            val y = location[1] + it.y + keyboardView.paddingTop - popupHeight
 
             popupWindow.showAtLocation(
-                keyboardView,
+                keyboardView.rootView,
                 Gravity.NO_GRAVITY,
                 x,
                 y
