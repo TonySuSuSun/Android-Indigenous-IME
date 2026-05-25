@@ -1,10 +1,9 @@
-/*
- * Copyright 2021 LiteKite Startup. All rights reserved.
- */
 package com.litekite.ime.app;
 
 import android.content.res.Configuration;
+
 import androidx.annotation.NonNull;
+
 import com.litekite.ime.config.ConfigController;
 
 /**
