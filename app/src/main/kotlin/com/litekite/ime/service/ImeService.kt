@@ -448,29 +448,20 @@ class ImeService : InputMethodService(), ConfigController.Callback {
     }
 
     private fun switchLanguage(language: String) {
-        android.util.Log.d("IME_DB", "switchLanguage: '$language'")
-        try {
-            val dao = WordDatabase.getInstance(this, language).wordDao()
-            repository = WordRepository(dao)
-            android.util.Log.d("IME_DB", "switchLanguage success")
-        } catch (e: Exception) {
-            android.util.Log.e("IME_DB", "switchLanguage error: ${e.message}")
-        }
+        val dao = WordDatabase.getInstance(this, language).wordDao()
+        repository = WordRepository(dao)
     }
 
     private var searchJob: Job? = null
 
     fun onInputChanged(input: String) {
-        android.util.Log.d("IME_DB", "onInputChanged: '$input'")
         searchJob?.cancel()
         currentInput = input
         if (input.isEmpty()) {
             clearCandidates(); return
         }
         searchJob = scope.launch {
-            android.util.Log.d("IME_DB", "launching search for: '$input'")
             val candidates = repository.getCandidates(input)
-            android.util.Log.d("IME_DB", "candidates: $candidates")
             withContext(Dispatchers.Main) {
                 updateCandidates(candidates)
             }
