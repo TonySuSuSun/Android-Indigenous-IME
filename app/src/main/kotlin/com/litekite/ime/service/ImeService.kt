@@ -34,11 +34,6 @@ import kotlinx.coroutines.withContext
 import java.util.Locale
 import javax.inject.Inject
 
-/**
- * @author Vignesh S
- * @version 1.0, 01/06/2021
- * @since 1.0
- */
 @AndroidEntryPoint
 class ImeService : InputMethodService(), ConfigController.Callback {
 
